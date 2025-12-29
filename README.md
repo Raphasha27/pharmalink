@@ -1,7 +1,6 @@
 # NexusSys - Management System
 
-[![GitHub Pages](https://img.shields.io/badge/demo-live-success?style=flat-square)](https://raphasha27.github.io/Management-System/)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Raphasha27/Management-System/static.yml?style=flat-square&label=deployment)](https://github.com/Raphasha27/Management-System/actions)
+[![GitHub Pages](https://img.shields.io/badge/demo-coming_soon-blue?style=flat-square)](https://raphasha27.github.io/Management-System/)
 
 A modern, responsive dashboard for managing employees, projects, and finances. Built with HTML5 and Tailwind CSS.
 
