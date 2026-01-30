@@ -48,6 +48,12 @@ Real-time telemetry tracks bag temperatures (2°C - 8°C). Breaches trigger inst
 ### 📦 Inventory Management
 Live stock tracking with expiry alerts and low-stock notifications for chronic medications.
 
+### 🧠 Advanced Clinical Intelligence
+*   **AI OCR Extraction:** Automated parsing of physical prescriptions with confidence scoring.
+*   **Drug Interaction Engine:** Real-time checking for contraindicated medications (e.g., Warfarin/Aspirin).
+*   **SA Secure Identity:** Integrated validation of 13-digit South African ID numbers.
+*   **POPIA Audit Trail:** Immutable logging of all PHI (Protected Health Information) access.
+
 ---
 
 ## 🛠️ Tech Stack
