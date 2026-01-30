@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PharmaLink | Advanced Clinical Logistics Engine</title>
+    <title>National Health Dispatch | PharmaLink Government Utility</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.5);
-            --secondary: #ec4899;
-            --bg: #0b0f1a;
-            --card-bg: rgba(30, 41, 59, 0.4);
+            --primary: #1e3a8a; /* Government Blue */
+            --primary-glow: rgba(30, 58, 138, 0.5);
+            --secondary: #b45309; /* Official Gold/Amber */
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.6);
             --text: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #10b981;
@@ -37,20 +37,20 @@
             color: var(--text);
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(30, 58, 138, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(180, 83, 9, 0.1) 0%, transparent 40%);
         }
 
         /* Particles/Glows */
         .glow {
             position: fixed;
-            width: 400px;
-            height: 400px;
+            width: 500px;
+            height: 500px;
             background: var(--primary-glow);
-            filter: blur(100px);
+            filter: blur(120px);
             border-radius: 50%;
             z-index: -1;
-            opacity: 0.3;
+            opacity: 0.2;
             pointer-events: none;
         }
 
@@ -60,30 +60,39 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            border-bottom: 2px solid var(--primary);
             z-index: 1000;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 0 15px var(--accent);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
@@ -92,359 +101,299 @@
             color: var(--text-muted);
             font-weight: 500;
             transition: color 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .nav-links a:hover {
             color: var(--text);
         }
 
-        .btn-portal {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
+        .btn-login {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 0.6rem 1.8rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            box-shadow: 0 4px 15px var(--primary-glow);
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
-        .btn-portal:hover {
-            transform: scale(1.05);
+        .btn-login:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
         }
 
         /* Hero */
         .hero {
-            height: 100vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 10%;
-            padding-top: 80px;
+            padding-top: 120px;
         }
 
-        .badge {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1.25rem;
+        .govt-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--text);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #94a3b8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: white;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
         }
 
         .hero p {
             color: var(--text-muted);
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
             line-height: 1.6;
         }
 
         .cta-group {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: var(--accent);
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 2.8rem;
             border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
-            box-shadow: 0 10px 20px var(--primary-glow);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px var(--primary-glow);
+            transform: translateY(-4px);
+            background: #0ea672;
         }
 
-        .btn-outline {
-            background: transparent;
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
             color: white;
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 2.8rem;
             border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
             border: 1px solid var(--glass-border);
             transition: all 0.3s;
         }
 
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--text-muted);
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
         }
 
-        /* Features */
-        .features {
-            padding: 100px 5%;
+        /* Mission Section */
+        .mission {
+            padding: 100px 10%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 3rem;
         }
 
-        .feature-card {
+        .mission-item {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: 24px;
-            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid var(--glass-border);
+            text-align: left;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-        }
-
-        .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
+        .mission-item h3 {
+            font-size: 1.6rem;
             margin-bottom: 1rem;
+            color: var(--accent);
         }
 
-        .feature-card p {
+        .mission-item p {
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.7;
         }
 
-        /* System Status */
-        .status-section {
-            padding: 80px 5%;
+        /* Healthcare Status */
+        .system-check {
+            padding: 60px 5%;
+            background: #000;
             text-align: center;
+            border-top: 1px solid var(--glass-border);
         }
 
-        .status-container {
+        .status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: 1px solid var(--glass-border);
+            gap: 12px;
+            padding: 0.8rem 2rem;
+            background: #111827;
+            border-radius: 12px;
+            border: 1px solid #1f2937;
         }
 
-        .status-dot {
-            width: 12px;
-            height: 12px;
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: #ef4444;
             border-radius: 50%;
-            background: #64748b;
         }
 
-        .status-dot.online {
+        .pulse-dot.online {
             background: var(--accent);
             box-shadow: 0 0 10px var(--accent);
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
         /* Footer */
         footer {
-            padding: 50px 5%;
+            padding: 4rem 10%;
+            background: #070b14;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-top: 1px solid var(--glass-border);
-            text-align: center;
+        }
+
+        .footer-text {
             color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Persona Grid */
-        .persona-section {
-            padding: 100px 5%;
-            background: rgba(0,0,0,0.2);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .persona-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .persona-card {
-            background: var(--card-bg);
-            border: 1px solid var(--glass-border);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .persona-card:hover {
-            background: rgba(99, 102, 241, 0.1);
-            border-color: var(--primary);
-            transform: scale(1.02);
-        }
-
-        .persona-card h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .persona-card p {
             font-size: 0.85rem;
-            color: var(--text-muted);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
     <div class="glow" style="top: -100px; left: -100px;"></div>
-    <div class="glow" style="bottom: -100px; right: -100px;"></div>
-
+    
     <nav>
         <div class="logo">
-            <div style="width: 24px; height: 24px; background: var(--primary); border-radius: 6px;"></div>
-            PharmaLink
+            <div class="logo-icon">🇿🇦</div>
+            PharmaLink | National Health
         </div>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#compliance">Compliance</a></li>
-            <li><a href="#api">API</a></li>
+            <li><a href="#mission">Our Mandate</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="demo.html?p=pharmacy">Control Center</a></li>
         </ul>
-        <a href="demo.html" class="btn-portal">Launch Platform</a>
+        <a href="demo.html?p=patient" class="btn-login">Citizen Login</a>
     </nav>
 
     <section class="hero">
-        <div class="badge">SAPC & POPIA Compliant</div>
-        <h1>Unified Clinical Logistics <br> & Compliance Engine</h1>
-        <p>PharmaLink bridges the last-mile compliance gap for Schedule 5+ medications with biometric chain-of-custody and real-time IoT cold-chain monitoring.</p>
+        <div class="govt-stamp">Department of Health Utility | National Health Insurance Ready</div>
+        <h1>Ending Healthcare Queues <br> <span>Through Direct Delivery</span></h1>
+        <p>A national infrastructure project designed to reduce lines at public healthcare facilities. Clinics are for checkups; prescriptions are for home delivery. Specialized care for the elderly and chronic disease patients across public and private sectors.</p>
+        
         <div class="cta-group">
-            <a href="demo.html" class="btn-primary">Launch Master Portal</a>
-            <a href="https://github.com/Raphasha27/pharmalink" target="_blank" class="btn-outline">View Repository</a>
+            <a href="demo.html?p=patient" class="btn-primary">
+                <span>📦 Collect My Chronic Medication</span>
+            </a>
+            <a href="demo.html?p=doctor" class="btn-secondary">
+                <span>👵 Register Elderly Dependent</span>
+            </a>
         </div>
 
-        <div class="status-section" style="margin-top: 4rem;">
-            <div class="status-container">
-                <div id="status-dot" class="status-dot"></div>
-                <span id="status-text" style="font-size: 0.85rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">Checking System Status...</span>
+        <div class="system-check" style="margin-top: 5rem; background: transparent;">
+            <div class="status-pill">
+                <div id="status-dot" class="pulse-dot"></div>
+                <span id="status-text" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Connecting to National Health Network...</span>
             </div>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="feature-card">
-            <div class="icon">❄️</div>
-            <h3>IoT Cold-Chain</h3>
-            <p>Real-time telemetry tracking for temperature-sensitive medications (2°C - 8°C) with automated compliance alerts.</p>
+    <section class="mission" id="mission">
+        <div class="mission-item">
+            <h3>📉 Queue Reduction</h3>
+            <p>Our mandate is to remove 2 million daily visits from outpatient clinics. By delivering chronic meds directly to citizens, we free up doctors for critical checkups and emergencies.</p>
         </div>
-        <div class="feature-card">
-            <div class="icon">🔐</div>
-            <h3>Biometric Verification</h3>
-            <p>FaceID/TouchID multi-factor authentication for Schedule 6 substances to ensure verified recipient handoff.</p>
+        <div class="mission-item">
+            <h3>👵 Elderly Care First</h3>
+            <p>We prioritize the vulnerable. Our door-to-door network ensures senior citizens receive their lifesaving treatment without the physical strain of hospital travel.</p>
         </div>
-        <div class="feature-card">
-            <div class="icon">💳</div>
-            <h3>ZAR Financial Engine</h3>
-            <p>Integrated Medical Aid billing and Paystack-powered co-payments for seamless South African healthcare cycles.</p>
-        </div>
-    </section>
-
-    <section class="persona-section">
-        <div class="section-title">
-            <h2>Multi-Persona Ecosystem</h2>
-            <p>Experience the platform from every angle of the healthcare supply chain.</p>
-        </div>
-        <div class="persona-grid">
-            <a href="demo.html?p=pharmacy" class="persona-card">
-                <h4>🏥 Pharmacy</h4>
-                <p>Command center for inventory and dispatch</p>
-            </a>
-            <a href="demo.html?p=doctor" class="persona-card">
-                <h4>👨‍⚕️ Doctor</h4>
-                <p>Digital prescription & clinical signing</p>
-            </a>
-            <a href="demo.html?p=driver" class="persona-card">
-                <h4>🚚 Driver</h4>
-                <p>Logistics terminal & biometric delivery</p>
-            </a>
-            <a href="demo.html?p=patient" class="persona-card">
-                <h4>🏠 Patient</h4>
-                <p>Order tracking & co-payment management</p>
-            </a>
+        <div class="mission-item">
+            <h3>🏢 Sector Integration</h3>
+            <p>We bridge the gap between Public and Private. Utilizing a unified logistics fleet, we assist both government clinics and private hospitals with secure medication transport.</p>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 PharmaLink Prototype. Built for South African HealthTech Innovation. 🇿🇦</p>
+        <div class="footer-text">
+            &copy; 2026 National Health Dispatch Infrastructure. Built for the People of South Africa. 🇿🇦
+        </div>
+        <div style="display: flex; gap: 20px;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 0.8rem;">POPIA Policy</a>
+            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 0.8rem;">NHI Integration</a>
+        </div>
     </footer>
 
     <script>
-        // --- BACKEND CONNECTION LOGIC ---
         const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:3000'
             : window.location.origin; 
 
-        async function checkBackendStatus() {
+        async function checkStatus() {
             const dot = document.getElementById('status-dot');
             const text = document.getElementById('status-text');
             
             try {
                 const response = await fetch(API_BASE_URL + '/api/auth/health-check').catch(() => null);
-
                 if (response && response.status === 200) {
                     dot.classList.add('online');
-                    text.innerText = "System Engine Online";
+                    text.innerText = "NHI Dispatch System Online";
                     text.style.color = "var(--accent)";
                 } else {
                     throw new Error('Offline');
                 }
             } catch (e) {
                 dot.classList.remove('online');
-                text.innerText = "System Engine Offline (Local Mode)";
-                text.style.color = "var(--text-muted)";
+                text.innerText = "Offline Mode (Local Infrastructure Only)";
+                text.style.color = "#94a3b8";
             }
         }
-
-        checkBackendStatus();
-        setInterval(checkBackendStatus, 15000);
+        checkStatus();
+        setInterval(checkStatus, 30000);
     </script>
 </body>
 </html>

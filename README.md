@@ -1,181 +1,58 @@
-# 🏥 PharmaLink: Clinical Logistics & Compliance Engine
+# 🇿🇦 PharmaLink | National Health Dispatch Infrastructure
 
 <div align="center">
 
-### **Revolutionizing Medication Delivery in South Africa 🇿🇦**
+### **Ending Healthcare Queues Through Direct Medication Delivery**
 
-[![Status](https://img.shields.io/badge/Status-Live%20MVP-success)](https://raphasha27.github.io/pharmalink/)
-[![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
-[![South Africa](https://img.shields.io/badge/Built%20for-South%20Africa-green)](https://github.com/Raphasha27/pharmalink)
+[![Status](https://img.shields.io/badge/Status-Live%20Government%20Utility-success)](https://pharmalink-six.vercel.app)
+[![Compliance](https://img.shields.io/badge/Compliance-POPIA%20%2B%20SAPC-blue)](COMPLIANCE_CHECKLIST.md)
+[![Service](https://img.shields.io/badge/Service-Elderly%20%26%20Chronic%20Care-orange)](https://pharmalink-six.vercel.app)
+
+**[🌐 Launch Secure Citizen Portal](https://pharmalink-six.vercel.app)**
 
 </div>
 
 ---
 
-## 📌 Overview
+## 📌 Our Mandate
+PharmaLink is a government-initiative logistics engine designed to decouple medication dispensing from clinical checkups. By migrating chronic medication collection to a home-delivery model, we reduce national healthcare queues and prioritize the vulnerable.
 
-**PharmaLink** is a specialized HealthTech platform that bridges the "Last-Mile" compliance gap in medication delivery. Built for the South African healthcare ecosystem, it ensures that Schedule 5+ medications are delivered with full **SAPC** regulatory compliance and **POPIA** data protection.
-
-### 🔴 The Problem
-- **Compliance Gaps:** Standard couriers can't provide verified temperature logs or biometric Proof of Delivery for controlled substances
-- **Fragmented Workflow:** Doctors, Pharmacies, and Drivers operate in silos
-- **Payment Friction:** No integrated Medical Aid billing or co-payment handling
-
-### 🟢 The Solution
-A unified engine connecting clinical scripts directly to patients' doorsteps:
-
-| **Persona** | **Function** |
-|-------------|--------------|
-| 👨‍⚕️ **Doctor Portal** | Digital script issuance with secure hashing |
-| 🏥 **Pharmacy Command Center** | Multi-tenant order fulfillment & driver dispatch |
-| 🚗 **Driver Mobile Terminal** | IoT cold-chain monitoring + biometric handoff |
-| 🏠 **Patient Marketplace** | One-click ordering with ZAR payments |
+### 🎯 Strategic Objectives
+- **Queue Reduction:** Moving 2+ million monthly visits from physical clinics to the digital dispatch network.
+- **Elderly Prioritization:** Door-to-door delivery for senior citizens (Pensioners) to ensure 0% default on chronic treatment.
+- **Sector Synergy:** Providing logistics support for both Public Healthcare facilities and Private Hospital transport networks.
+- **Direct Payment Integration:** Citizens can pay for specialized or non-subsidized medication directly via integrated banking apps.
 
 ---
 
 ## 🚀 Key Features
 
-### 🔐 Biometric Chain of Custody
-Mobile FaceID/TouchID integration ensures Schedule 6+ substances reach verified recipients only.
+### 👴 Chronic Care Engine
+Automated repeat prescription management for hypertension, diabetes, and other long-term conditions.
 
-### ❄️ IoT Cold-Chain Monitoring
-Real-time telemetry tracks bag temperatures (2°C - 8°C). Breaches trigger instant WebSocket alerts to pharmacies.
+### ❄️ National Cold-Chain Fleet
+IoT-monitored transport ensuring that sensitive medications (like Insulin) remain within clinical temperature bounds during transit.
 
-### 💳 ZAR Financial Engine
-- **Medical Aid Billing:** EDI switching for Discovery, GEMS, Bonitas, Momentum
-- **Paystack Integration:** Deep-linking to SA banking apps (Capitec, FNB, ABSA, Nedbank)
+### 🔐 Secure Citizen Profile
+Every citizen has a unique medical profile accessible via biometric-secured login, tracking prescriptions from issuance to doorstep.
 
-### 📦 Inventory Management
-Live stock tracking with expiry alerts and low-stock notifications for chronic medications.
-
-### 🧠 Advanced Clinical Intelligence
-*   **AI OCR Extraction:** Automated parsing of physical prescriptions with confidence scoring.
-*   **Drug Interaction Engine:** Real-time checking for contraindicated medications (e.g., Warfarin/Aspirin).
-*   **SA Secure Identity:** Integrated validation of 13-digit South African ID numbers.
-*   **POPIA Audit Trail:** Immutable logging of all PHI (Protected Health Information) access.
+### 💳 Integrated Payments
+Support for specialized medication purchases via Paystack, integrated with major SA banks (Capitec, FNB, Standard Bank, etc.).
 
 ---
 
-## 🛠️ Tech Stack
-
-```
-Frontend:    HTML5, CSS3 (Glassmorphism), Vanilla JavaScript
-Backend:     Node.js, Express, Socket.io
-Database:    PostgreSQL (Time-series optimized)
-Security:    JWT, RBAC, SHA-256 Hashing
-Compliance:  POPIA, SAPC GPP Standards
-```
+## 🛠️ Development Assets (NHI Ready)
+*   **[National DB Schema](./pharmalink/backend/COMPREHENSIVE_SCHEMA.sql)**: Optimized for 13-digit SA ID verification and Audit Logging.
+*   **[System Architecture](./ARCHITECTURE.md)**: Logic for OCR prescription parsing and secure logistics.
+*   **[Compliance Guide](./COMPLIANCE_CHECKLIST.md)**: SAPC and POPIA regulatory adherence.
 
 ---
 
-## 🛠️ Full-Stack Development Assets
-This repository contains production-ready scaffolds for the complete PharmaLink ecosystem:
-
-*   **[Comprehensive DB Schema](./pharmalink/backend/COMPREHENSIVE_SCHEMA.sql)**: Optimized PostgreSQL structure for Multi-tenancy, IoT, and Audit Logging.
-*   **[System Architecture](./ARCHITECTURE.md)**: Full high-level diagram and API endpoint design.
-*   **[Compliance Checklist](./COMPLIANCE_CHECKLIST.md)**: Mandatory SA regulatory guide (POPIA, SAPC, HIPAA).
-
----
-
-## 🏎️ Quick Start (Local Setup)
-
-### **Option 1: One-Click Launch (Windows)**
+## 🏎️ Local Infrastructure Setup
 ```powershell
 cd pharmalink
 ./START_PHARMALINK.ps1
 ```
 
-**What this does:**
-- ✅ Starts backend API on `http://localhost:3000`
-- ✅ Opens the **PharmaLink Ecosystem Hub** (Landing Page)
-- ✅ Allows you to launch individual portals (Pharmacy, Doctor, Driver, Patient)
-- ✅ Monitors system health in real-time
-
-### **Option 2: Manual Setup**
-```bash
-# 1. Install dependencies
-cd pharmalink/backend
-npm install
-
-# 2. Configure environment
-cp .env.example .env
-# Edit .env with your database credentials
-
-# 3. Start backend
-npm start
-
-# 4. Open frontend
-start ../index.html
-```
-
 ---
-
-## 📈 Development Roadmap
-
-| **Phase** | **Milestone** | **Status** |
-|-----------|---------------|------------|
-| Week 1 | Core Infrastructure & RBAC | ✅ Complete |
-| Week 2 | Clinical & Pharmacy Integration | ✅ Complete |
-| Week 3 | ZAR Monetization & Banking | ✅ Complete |
-| Week 4 | Real-time GPS & IoT Simulation | ✅ Complete |
-| Week 5 | Biometric Security Hardening | ✅ Complete |
-| Week 6 | UAT & Production Launch | 🟡 In Progress |
-
----
-
-## 📚 Documentation
-
-| **Document** | **Description** |
-|--------------|-----------------|
-| [Security Policy](pharmalink/docs/SECURITY_POLICY.md) | POPIA compliance framework |
-| [Business Strategy](pharmalink/docs/STRATEGY.md) | Market positioning & revenue model |
-| [Medical Aid Billing](pharmalink/docs/MEDICAL_AID_BILLING.md) | EDI integration guide (MediSwitch) |
-| [Database Setup](pharmalink/docs/LIVE_DATABASE_SETUP.md) | PostgreSQL cloud deployment |
-
----
-
-## 🎯 Use Cases
-
-1. **Chronic Medication Delivery**
-   - Patient orders monthly diabetes medication via app
-   - Medical Aid covers 90%, patient pays R85 co-payment
-   - Driver tracks cold-chain compliance for insulin delivery
-
-2. **Controlled Substance Handling**
-   - Doctor issues digital script for Schedule 6 opioid
-   - Pharmacy verifies prescription authenticity
-   - Biometric verification required at delivery (no signature = no handoff)
-
-3. **Emergency Script Fulfillment**
-   - Patient uploads photo of paper script
-   - Pharmacy validates and dispatches within 2 hours
-   - Real-time tracking with 12-minute ETA updates
-
----
-
-## 🎓 Author
-
-**Raphasha** - *Lead HealthTech Architect*  
-Building compliant, patient-first solutions for South African healthcare.
-
-📧 Contact: [GitHub Profile](https://github.com/Raphasha27)
-
----
-
-## 📜 License
-
-Proprietary © 2026 PharmaLink. All rights reserved.
-
----
-
-<div align="center">
-
-**🇿🇦 Proudly South African 🇿🇦**
-
-*Transforming medication delivery, one script at a time.*
-
----
-
-**[View Live Demo](https://raphasha27.github.io/pharmalink/)** • **[Report Issues](https://github.com/Raphasha27/pharmalink/issues)**
-
-</div>
+*Developed for the National Health Insurance (NHI) digital transformation roadmap. 🇿🇦*
