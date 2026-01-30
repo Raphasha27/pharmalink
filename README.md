@@ -1,54 +1,71 @@
-# PharmaLink: AI-Driven Clinical Logistics & Compliance Engine 🇿🇦
+# 🏥 PharmaLink: Clinical Logistics & Compliance Engine
 
-![PharmaLink Header](https://raw.githubusercontent.com/Raphasha27/Management-System/main/pharmalink_preview.png)
+<div align="center">
 
-## 📌 Case Study: Revolutionizing Medication Delivery in South Africa
+![PharmaLink Banner](https://img.shields.io/badge/PharmaLink-2026-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Live%20MVP-success?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
-**PharmaLink** is a specialized, multi-persona HealthTech platform designed to solve the "Last-Mile" compliance gap in medication delivery. In the South African context, delivering Schedule 5+ medications requires more than just a courier; it requires a "Chain of Custody" that satisfies **SAPC (SA Pharmacy Council)** regulations and **POPIA** data privacy standards.
+**Revolutionizing Medication Delivery in South Africa 🇿🇦**
 
-### 🔴 The Problem
-*   **Compliance Gaps:** Standard couriers cannot provide the verified temperature logs or biometric "Proof of Delivery" (PoD) required for high-schedule drugs.
-*   **Fragmented Workflow:** Doctors, Pharmacies, and Drivers operate in silos, leading to delivery delays for critical chronic medication.
-*   **Payment Friction:** Lack of integrated Medical Aid billing and co-payment handling results in abandoned orders.
+[Live Demo](#) • [Documentation](docs/) • [Case Study](#case-study)
 
-### 🟢 The PharmaLink Solution
-A unified engine that connects the clinical script directly to the patient's doorstep with 4 synchronized personas:
-1.  **Doctor Portal:** Digital script issuance with secure clinical hashing.
-2.  **Pharmacy Command Center:** Multi-tenant order intake and automated driver dispatching.
-3.  **Driver Mobile Terminal:** Real-time IoT cold-chain monitoring (2°C - 8°C) and biometric hand-off.
-4.  **Patient Marketplace:** One-click ordering, real-time tracking, and integrated **ZAR Paystack** payments.
+</div>
 
 ---
 
-## 🚀 Key Technical Features
+## 📌 Overview
 
-### 🔐 1. Biometric Chain of Custody
-Integrates mobile FaceID/TouchID hashing to ensure that Schedule 6+ substances are only handed over to the verified recipient. No more lost or stolen scripts.
+**PharmaLink** is a specialized HealthTech platform that bridges the "Last-Mile" compliance gap in medication delivery. Built for the South African healthcare ecosystem, it ensures that Schedule 5+ medications are delivered with full **SAPC** regulatory compliance and **POPIA** data protection.
 
-### ❄️ 2. IoT Cold-Chain Monitoring
-A real-time telemetry engine tracks bag temperatures during transit. If the temperature exceeds 8°C, an automated `COLD_CHAIN_BREACH` alert is broadcast via WebSockets to the pharmacy dashboard.
+### 🔴 The Problem
+- **Compliance Gaps:** Standard couriers can't provide verified temperature logs or biometric Proof of Delivery for controlled substances
+- **Fragmented Workflow:** Doctors, Pharmacies, and Drivers operate in silos
+- **Payment Friction:** No integrated Medical Aid billing or co-payment handling
 
-### 💳 3. ZAR Financial Engine
-*   **Medical Aid Billing:** Simulated EDI switching (Discovery, GEMS, etc.) for real-time claim adjudication.
-*   **Paystack Integration:** Optimized for South African banking apps (Capitec, FNB, ABSA) via deep-linking and Instant EFT.
+### 🟢 The Solution
+A unified engine connecting clinical scripts directly to patients' doorsteps:
+
+1. 👨‍⚕️ **Doctor Portal** - Digital script issuance with secure hashing
+2. 🏥 **Pharmacy Command Center** - Multi-tenant order fulfillment
+3. 🚗 **Driver Mobile Terminal** - IoT cold-chain monitoring + biometric handoff
+4. 🏠 **Patient Marketplace** - One-click ordering with ZAR payments
+
+---
+
+## 🚀 Key Features
+
+### 🔐 Biometric Chain of Custody
+Mobile FaceID/TouchID integration ensures Schedule 6+ substances reach verified recipients only.
+
+### ❄️ IoT Cold-Chain Monitoring
+Real-time telemetry tracks bag temperatures (2°C - 8°C). Breaches trigger instant WebSocket alerts.
+
+### 💳 ZAR Financial Engine
+- **Medical Aid Billing:** EDI switching for Discovery, GEMS, Bonitas
+- **Paystack Integration:** Deep-linking to SA banking apps (Capitec, FNB, ABSA)
+
+### 📦 Inventory Management
+Live stock tracking with expiry alerts and low-stock notifications.
 
 ---
 
 ## 🛠️ Tech Stack
-*   **Frontend:** HTML5, CSS3 (Glassmorphism), Vanilla JS.
-*   **Backend:** Node.js, Express, Socket.io (Real-time broadcasting).
-*   **Persistence:** PostgreSQL (Optimized for time-series logistics data).
-*   **Security:** JWT (Role-Based Access Control), SHA-256 Hashing for Biometrics.
 
----
+**Frontend**
+- HTML5, CSS3 (Glassmorphism)
+- Vanilla JavaScript
 
-## 📈 Roadmap (6-Week MVP)
-*   **Week 1:** Core Infra & RBAC (Completed)
-*   **Week 2:** Clinical & Pharmacy Integration (Completed)
-*   **Week 3:** Monetization & Bank Scan (Completed)
-*   **Week 4:** Real-time GPS & IoT Simulation (Completed)
-*   **Week 5:** Biometric Security Hardening (Completed)
-*   **Week 6:** UAT & Production Launch (In Progress)
+**Backend**
+- Node.js + Express
+- Socket.io (Real-time updates)
+- PostgreSQL
+- JWT Authentication
+
+**Security**
+- Role-Based Access Control (RBAC)
+- SHA-256 Biometric Hashing
+- POPIA Compliance Framework
 
 ---
 
@@ -61,30 +78,63 @@ cd pharmalink
 ```
 
 This will:
-1. Start the backend API on `http://localhost:3000`
-2. Open the dashboard in your default browser
-3. Keep both services running simultaneously
+1. ✅ Start backend API on `http://localhost:3000`
+2. ✅ Open dashboard in your browser
+3. ✅ Keep both services running
 
 ### Manual Setup
 ```bash
-# Install Backend Dependencies
+# Install dependencies
 cd pharmalink/backend
 npm install
 
-# Start Backend (in background)
-npm start &
+# Start backend
+npm start
 
-# Open Frontend
+# Open frontend
 start ../index.html
 ```
 
 ---
 
-## 🌐 Live Demo
-**GitHub Pages:** [https://raphasha27.github.io/Management-System/](https://raphasha27.github.io/Management-System/)
+## 📈 Development Roadmap
+
+- ✅ **Week 1:** Core Infrastructure & RBAC
+- ✅ **Week 2:** Clinical & Pharmacy Integration
+- ✅ **Week 3:** ZAR Monetization & Bank Integration
+- ✅ **Week 4:** Real-time GPS & IoT Simulation
+- ✅ **Week 5:** Biometric Security Hardening
+- ✅ **Week 6:** UAT & Production Launch
+
+---
+
+## 📄 Documentation
+
+- [Security Policy](pharmalink/docs/SECURITY_POLICY.md) - POPIA compliance framework
+- [Strategy](pharmalink/docs/STRATEGY.md) - Business model & market positioning
+- [Medical Aid Billing](pharmalink/docs/MEDICAL_AID_BILLING.md) - EDI integration guide
+- [Database Setup](pharmalink/docs/LIVE_DATABASE_SETUP.md) - PostgreSQL deployment
 
 ---
 
 ## 🎓 Author
+
 **Raphasha** - *Lead HealthTech Architect*
-Built with a focus on South African Regulatory Compliance (SAPC / POPIA).
+
+Built with focus on South African regulatory compliance (SAPC / POPIA).
+
+---
+
+## 📜 License
+
+Proprietary - All rights reserved © 2026 PharmaLink
+
+---
+
+<div align="center">
+
+**🇿🇦 Proudly South African 🇿🇦**
+
+*Transforming medication delivery, one script at a time.*
+
+</div>
