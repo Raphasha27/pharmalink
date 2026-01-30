@@ -531,6 +531,12 @@
                 <div>
                     <div style="font-size: 0.875rem; font-weight: 600;">System Admin</div>
                     <div style="font-size: 0.75rem; color: var(--text-muted);">Sandton, GP</div>
+                    <div id="connection-status"
+                        style="font-size: 0.7rem; margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+                        <span
+                            style="width: 8px; height: 8px; background: #64748b; border-radius: 50%; display: inline-block;"></span>
+                        <span style="color: #94a3b8;">Offline</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1029,7 +1035,43 @@
             alert('🚀 Digital Script Issued! \n\nThe prescription has been securely hashed and transmitted directly to the Pharmalink Pharmacy Network. The patient will receive an SMS to complete the delivery order.');
         }
 
-        // Init
+        // --- BACKEND CONNECTION LOGIC ---
+        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000'
+            : 'https://pharmalink-backend.up.railway.app'; // Replace with your production URL
+
+        async function checkBackendStatus() {
+            const statusEl = document.getElementById('connection-status');
+            try {
+                // simple health check using fetch to the root or a health endpoint
+                // Since we didn't explicitly make a health endpoint, we'll try the root
+                const response = await fetch(API_BASE_URL + '/api/auth/health-check', { method: 'GET', headers: { 'Content-Type': 'application/json' } }).catch(() => null);
+
+                // For demo purposes, if we get any response (even 404), it means the server is accessible
+                // or if we are local and the server is running. 
+                // Let's assume if fetch doesn't throw a network error, we are "connected"
+
+                if (response) {
+                    statusEl.innerHTML = `
+                        <span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #10b981;"></span>
+                        <span style="color: #6ee7b7;">System Online</span>
+                    `;
+                } else {
+                    throw new Error('No response');
+                }
+            } catch (e) {
+                statusEl.innerHTML = `
+                    <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+                    <span style="color: #94a3b8;">Offline Mode</span>
+                `;
+            }
+        }
+
+        // Check immediately and then every 30 seconds
+        checkBackendStatus();
+        setInterval(checkBackendStatus, 30000);
+
+        // --- INIT ---
         switchPersona('pharmacy');
     </script>
 </body>
