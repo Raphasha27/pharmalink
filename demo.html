@@ -526,7 +526,9 @@
 
     <aside id="main-sidebar">
         <div class="logo">
-            <div class="logo-icon">🇿🇦</div>
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hospital"><path d="M12 6v4"/><path d="M14 14h-4"/><path d="M14 18h-4"/><path d="M21 11.48V21a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6.02"/><path d="M22 8h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4"/><path d="M3 10h4"/><path d="M3 14h4"/><path d="M3 18h4"/><path d="M7 3v4"/><path d="M11 3v4"/><path d="m21 2-5 5"/><path d="m11 21-5-5"/></svg>
+            </div>
             Health Dispatch
         </div>
         <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent); padding: 10px; border-radius: 12px; margin-top: 1rem; font-size: 0.75rem;">
@@ -794,7 +796,7 @@
                     <p style="color: var(--text-muted); margin: 1rem 0;">The driver app handles the most sensitive part
                         of the journey. In this prototype, we simulate:</p>
                     <ul style="color: var(--text-muted); display: flex; flex-direction: column; gap: 15px;">
-                        <li><strong>IoT Integration:</strong> Bags are equipped with BLE sensors. Temperature is logged
+                        <li><strong>IoT Telemetry:</strong> Cold-chain data (temperature, humidity) is synced
                             to the blockchain/immutable ledger every 30 seconds.</li>
                         <li><strong>Geofencing:</strong> Deliveries can only be marked "Complete" when the driver's GPS
                             is within 50 meters of the delivery destination.</li>
@@ -813,11 +815,13 @@
 
                     <div style="display: flex; flex-direction: column; gap: 20px;">
                         <div
-                            style="border: 2px dashed rgba(255,255,255,0.1); padding: 3rem; text-align: center; border-radius: 20px;">
-                            <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
+                            style="border: 2px dashed rgba(255,255,255,0.1); padding: 3rem; text-align: center; border-radius: 20px; cursor: pointer;"
+                            onclick="alert('Select Prescription File: NHI Digital Signature Required.')">
+                            <div style="margin-bottom: 1rem; color: var(--primary);">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            </div>
                             <p>Upload your Prescription (PDF/Photo)</p>
-                            <button class="persona-btn" style="background: var(--primary); margin-top: 1rem;">Browse
-                                Files</button>
+                            <button class="persona-btn" style="background: var(--primary); margin-top: 1rem;">Browse Files</button>
                         </div>
 
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -932,30 +936,30 @@
     <script>
         const personaNavItems = {
             pharmacy: [
-                { label: 'Dashboard', icon: '⬚', active: true },
-                { label: 'Live Tracking', icon: '⦿' },
-                { label: 'Inventory', icon: '☰' },
-                { label: 'Finances', icon: 'R' },
-                { label: 'Compliance Audit', icon: '🛡️' }
+                { label: 'Dashboard', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>', active: true },
+                { label: 'Live Tracking', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' },
+                { label: 'Inventory', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>' },
+                { label: 'Finances', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+                { label: 'Compliance Audit', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' }
             ],
             doctor: [
-                { label: 'E-Prescribe', icon: '✍️', active: true },
-                { label: 'Patient Files', icon: '📂' },
-                { label: 'Script History', icon: '↻' },
-                { label: 'Settings', icon: '⚙️' }
+                { label: 'E-Prescribe', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>', active: true },
+                { label: 'Patient Files', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><path d="M14 2v6h6"/><path d="M2 15h10"/><path d="m9 18 3-3-3-3"/></svg>' },
+                { label: 'Script History', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>' },
+                { label: 'Settings', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>' }
             ],
             driver: [
-                { label: 'Active Task', icon: '🚚', active: true },
-                { label: 'Order History', icon: '↻' },
-                { label: 'Vehicle Health', icon: '⚡' },
-                { label: 'Earnings', icon: 'R' }
+                { label: 'Active Task', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3m1 0a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0m9 0h1v-4h-7m5 4a2 2 0 1 0 4 0m-4 0a2 2 0 1 1 4 0m-4-7V5h7l2 5h-2"/></svg>', active: true },
+                { label: 'Order History', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>' },
+                { label: 'Vehicle Health', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>' },
+                { label: 'Earnings', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' }
             ],
             patient: [
-                { label: 'Order Meds', icon: '🛒', active: true },
-                { label: 'Track Delivery', icon: '📍' },
-                { label: 'My Prescriptions', icon: '💊' },
-                { label: 'Payment Methods', icon: '💳' },
-                { label: 'Support', icon: '?' }
+                { label: 'Order Meds', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>', active: true },
+                { label: 'Track Delivery', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>' },
+                { label: 'My Prescriptions', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>' },
+                { label: 'Payment Methods', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>' },
+                { label: 'Support', icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' }
             ]
         };
 

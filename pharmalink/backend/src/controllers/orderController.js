@@ -1,4 +1,24 @@
 const db = require('../config/db');
+const medicalAidService = require('../services/medicalAidService');
+
+/**
+ * Patient: Check real-time benefits / co-payment
+ */
+exports.checkBenefits = async (req, res) => {
+    try {
+        const { schemeName, medications } = req.body;
+
+        if (!schemeName || !medications) {
+            return res.status(400).json({ error: 'Missing scheme or medication details' });
+        }
+
+        const adjudicationResult = await medicalAidService.adjudicateClaim(schemeName, medications);
+        res.json(adjudicationResult);
+    } catch (error) {
+        console.error('Benefits Adjudication Error:', error);
+        res.status(500).json({ error: 'Failed to adjudicate medical aid claim' });
+    }
+};
 
 /**
  * Pharmacy: Get all pending orders for the pharmacy
