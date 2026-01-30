@@ -16,15 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const deployBtn = document.getElementById('btn-deploy');
     if (deployBtn) {
         deployBtn.addEventListener('click', () => {
-            deployBtn.innerText = 'Workflow Running...';
+            deployBtn.innerText = 'Auditing AML Compliance...';
             deployBtn.style.opacity = '0.7';
-            deployBtn.style.pointerEvents = 'none';
-
             setTimeout(() => {
-                alert('CI Workflow triggered successfully using GMS_TOKEN!');
-                deployBtn.innerText = 'Run Workflow';
+                deployBtn.innerText = 'Audit Passed: 100%';
+                deployBtn.style.background = 'var(--accent-green)';
                 deployBtn.style.opacity = '1';
-                deployBtn.style.pointerEvents = 'auto';
+                console.log('AML Regulatory Audit Simulation Complete.');
             }, 2000);
         });
     }

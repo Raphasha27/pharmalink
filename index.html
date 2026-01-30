@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<title>NexusSys | Integrated Startup Engine</title>
-<link rel="stylesheet" href="index.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fintech Strategic Ops Hub | Executive Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -25,47 +28,51 @@
                 <div class="logo-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="1" y1="10" x2="23" y2="10"></line>
                     </svg>
                 </div>
-                <span>NexusSys Engine</span>
+                <span>FintechOps Hub</span>
             </div>
 
             <nav class="nav-links">
-                <a href="#" class="nav-item active" data-tab="strategy" id="nav-strategy">
+                <a href="#" class="nav-item active" data-tab="ecosystem" id="nav-ecosystem">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
                     </svg>
-                    Strategy Engine
+                    Card Ecosystem
                 </a>
-                <a href="#" class="nav-item" data-tab="compliance" id="nav-compliance">
+                <a href="#" class="nav-item" data-tab="aml" id="nav-aml">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
-                    ZA Compliance
+                    AML & KYC
                 </a>
-                <a href="#" class="nav-item" data-tab="infrastructure" id="nav-infrastructure">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <path
-                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                        </path>
-                    </svg>
-                    Stack & Ops
-                </a>
-                <a href="#" class="nav-item" data-tab="lifecycle" id="nav-lifecycle">
+                <a href="#" class="nav-item" data-tab="programs" id="nav-programs">
                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                     </svg>
-                    Scaling Roadmap
+                    Programs (PMO)
+                </a>
+                <a href="#" class="nav-item" data-tab="leadership" id="nav-leadership">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Leadership & CBT
                 </a>
             </nav>
 
             <div class="sidebar-footer">
                 <div class="user-info">
-                    <div class="avatar">U</div>
+                    <div class="avatar">T</div>
                     <div class="details">
-                        <p class="name">Administrator</p>
-                        <p class="status">System Online</p>
+                        <p class="name">Thabo</p>
+                        <p class="status">Global Head of CARD</p>
                     </div>
                 </div>
             </div>
@@ -75,12 +82,12 @@
         <main class="main-content">
             <header class="top-header">
                 <div class="welcome">
-                    <h1>Integrated Startup Engine</h1>
-                    <p>Synthesized operational blueprint for resilient and automated scaling.</p>
+                    <h1>Strategic Operations</h1>
+                    <p>Managing Issuing, Acquiring, and Regulatory Compliance across ARO markets.</p>
                 </div>
                 <div class="actions">
-                    <button class="btn btn-secondary">Export Blueprint</button>
-                    <button class="btn btn-primary" id="btn-deploy">Update Framework</button>
+                    <button class="btn btn-secondary">Compliance Report</button>
+                    <button class="btn btn-primary" id="btn-deploy">Active Initiatives</button>
                 </div>
             </header>
 
@@ -90,12 +97,13 @@
                     <div class="stat-icon purple">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                             fill="none">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg>
                     </div>
                     <div class="stat-data">
-                        <h3>Automated</h3>
-                        <p>Order-to-Cash Cycle</p>
+                        <h3>99.9%</h3>
+                        <p>ATM/POS Uptime</p>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -106,241 +114,186 @@
                         </svg>
                     </div>
                     <div class="stat-data">
-                        <h3>Stable</h3>
-                        <p>Product-Market Fit</p>
+                        <h3>100%</h3>
+                        <p>AML Compliance</p>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon green">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                             fill="none">
-                            <path
-                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                            </path>
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     </div>
                     <div class="stat-data">
-                        <h3>Integrated</h3>
-                        <p>SARS / CIPC Stack</p>
+                        <h3>16+ Yrs</h3>
+                        <p>Industry Expertise</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Tab Content: Strategy -->
-            <section id="tab-strategy" class="tab-pane active">
+            <!-- Tab Content: Card Ecosystem -->
+            <section id="tab-ecosystem" class="tab-pane active">
                 <div class="dashboard-body">
                     <div class="card main-view">
                         <div class="card-header">
-                            <h2>Hybrid Strategy Framework</h2>
-                            <div class="badge purple">Operational Blueprint</div>
+                            <h2>Card & Acquiring Ecosystem</h2>
+                            <div class="badge success">Active</div>
                         </div>
-                        <p class="section-intro">Integrating Lean Startup validation with Agile execution via OKR
-                            strategic alignment.</p>
+                        <div class="governance-list">
+                            <div class="gov-item">
+                                <div class="gov-info">
+                                    <strong>Virtual Card Implementation</strong>
+                                    <span>Leadership of FNB's pioneering virtual card programme.</span>
+                                </div>
+                                <div class="status-indicator success"></div>
+                            </div>
+                            <div class="gov-item">
+                                <div class="gov-info">
+                                    <strong>POS & E-commerce Infrastructure</strong>
+                                    <span>Managing global POS terminal networks and secure online payment
+                                        gateways.</span>
+                                </div>
+                                <div class="status-indicator success"></div>
+                            </div>
+                            <div class="gov-item">
+                                <div class="gov-info">
+                                    <strong>Tokenization Initiatives</strong>
+                                    <span>Rolling out card-on-file and device tokenization for mobile wallets.</span>
+                                </div>
+                                <div class="status-indicator success"></div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="card side-panel">
+                        <div class="card-header">
+                            <h2>Market Focus</h2>
+                        </div>
+                        <ul class="activity-feed">
+                            <li><span>Card Profitability Analysis</span></li>
+                            <li><span>ATM Network Expansion (ARO)</span></li>
+                            <li><span>Merchant Acquiring Strategy</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Content: AML & KYC -->
+            <section id="tab-aml" class="tab-pane">
+                <div class="dashboard-body">
+                    <div class="card main-view">
+                        <div class="card-header">
+                            <h2>Anti-Money Laundering & KYC</h2>
+                            <div class="badge purple">Regulatory Oversight</div>
+                        </div>
+                        <p class="section-intro">Embedding stringent AML protocols into product and operational strategy
+                            to mitigate financial crime risks.</p>
+
+                        <div class="stack-list">
+                            <div class="stack-item">
+                                <div class="item-head"><strong>KYC Verification Flow</strong><span>Compliance</span>
+                                </div>
+                                <p>Automated customer due diligence and identity verification workflows.</p>
+                            </div>
+                            <div class="stack-item">
+                                <div class="item-head"><strong>Transaction Monitoring</strong><span>Security</span>
+                                </div>
+                                <p>Real-time screening of card and ATM transactions for suspicious activity.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card side-panel">
+                        <div class="card-header">
+                            <h2>Key Regulators</h2>
+                        </div>
+                        <ul class="activity-feed">
+                            <li><strong>SARB Compliance</strong></li>
+                            <li><strong>FICA Compliance</strong></li>
+                            <li><strong>International AML Standards</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Content: Programs (PMO) -->
+            <section id="tab-programs" class="tab-pane">
+                <div class="dashboard-body">
+                    <div class="card main-view">
+                        <div class="card-header">
+                            <h2>Program Management Office</h2>
+                            <div class="badge blue">Agile Delivery</div>
+                        </div>
                         <div class="table-container">
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Framework</th>
-                                        <th>Core Purpose</th>
-                                        <th>Cycle</th>
-                                        <th>Metric</th>
+                                        <th>Project</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><strong>Lean Startup</strong></td>
-                                        <td>Market Validation</td>
-                                        <td>Continuous</td>
-                                        <td>Validated Learning</td>
+                                        <td>System Migrations</td>
+                                        <td>Program Manager</td>
+                                        <td>Completed</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Agile (Scrum)</strong></td>
-                                        <td>Operational Delivery</td>
-                                        <td>2 Weeks</td>
-                                        <td>Velocity / Quality</td>
+                                        <td>FNB Virtual Card</td>
+                                        <td>Lead Strategist</td>
+                                        <td>Launched</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>OKRs</strong></td>
-                                        <td>Strategic Alignment</td>
-                                        <td>1 Quarter</td>
-                                        <td>KR Achievement</td>
+                                        <td>Tokenization Pilot</td>
+                                        <td>Executive Sponsor</td>
+                                        <td>Scaling</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="info-block mt-2">
-                            <h3>The "Why" Layer</h3>
-                            <p>OKRs bridge high-level vision and daily tasks, preventing the "task list trap" by
-                                ensuring every sprint goal links to a measurable business outcome.</p>
-                        </div>
                     </div>
 
                     <div class="card side-panel">
                         <div class="card-header">
-                            <h2>Core Principles</h2>
-                        </div>
-                        <ul class="check-list">
-                            <li>Build-Measure-Learn Loop</li>
-                            <li>Two-Week Sprints</li>
-                            <li>Innovation Accounting</li>
-                            <li>Asynchronous Culture</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: Compliance -->
-            <section id="tab-compliance" class="tab-pane">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>South African Regulatory Hub</h2>
-                            <div class="badge success">Compliance First</div>
-                        </div>
-
-                        <div class="compliance-grid">
-                            <div class="comp-box">
-                                <h4>CIPC Maintenance</h4>
-                                <p>Mandatory 10-day window for Beneficial Ownership filing.</p>
-                            </div>
-                            <div class="comp-box">
-                                <h4>SARS eFiling</h4>
-                                <p>Integrated streams: Income Tax, VAT (>R1M), and PAYE/UIF.</p>
-                            </div>
-                        </div>
-
-                        <h3>SBC Tax Bracket (2025/2026)</h3>
-                        <div class="table-container">
-                            <table class="data-table small">
-                                <thead>
-                                    <tr>
-                                        <th>Taxable Income</th>
-                                        <th>Tax Rate</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>R1 – R95,750</td>
-                                        <td>0%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R95,751 – R365,000</td>
-                                        <td>7% of amount > R95,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>R365,001 +</td>
-                                        <td>Graduated up to 27%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="info-block warning mt-2">
-                            <h3>POPIA Protection</h3>
-                            <p>8 Conditions for Lawful Processing: Accountability, Openness, Security Safeguards, and
-                                Data Subject Participation are non-negotiable.</p>
-                        </div>
-                    </div>
-
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>Legal Deadlines</h2>
-                        </div>
-                        <ul class="activity-feed">
-                            <li><strong>CIPC Annual Returns</strong><br><small>Due on anniversary month</small></li>
-                            <li><strong>VAT Submissions</strong><br><small>Bi-monthly for vendors</small></li>
-                            <li><strong>PAIA Manual</strong><br><small>Mandatory transparency</small></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: Infrastructure -->
-            <section id="tab-infrastructure" class="tab-pane">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>Integrated SaaS Ecosystem</h2>
-                            <div class="badge blue">Best-of-Breed</div>
-                        </div>
-
-                        <div class="stack-list">
-                            <div class="stack-item">
-                                <div class="item-head"><strong>Notion / ClickUp</strong><span>Workspace & PM</span>
-                                </div>
-                                <p>Custom wikis and AI-powered task management.</p>
-                            </div>
-                            <div class="stack-item">
-                                <div class="item-head"><strong>HubSpot / Salesforce</strong><span>CRM & Sales</span>
-                                </div>
-                                <p>Single source of truth for customer lifecycle data.</p>
-                            </div>
-                            <div class="stack-item">
-                                <div class="item-head"><strong>Sage / Xero</strong><span>Finance & ZA Payroll</span>
-                                </div>
-                                <p>Automated VAT submissions and local labor compliance.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>2026 Trends</h2>
+                            <h2>Methodology</h2>
                         </div>
                         <div class="info-block purple">
-                            <h4>Governed AI</h4>
-                            <p>Automating knowledge summaries and internal workflows safely within the startup engine.
-                            </p>
+                            <h4>Agile & Scrum</h4>
+                            <p>Transitioning from Waterfall to high-velocity Agile sprints for complex banking
+                                transformations.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Tab Content: Lifecycle -->
-            <section id="tab-lifecycle" class="tab-pane">
+            <!-- Tab Content: Leadership -->
+            <section id="tab-leadership" class="tab-pane">
                 <div class="dashboard-body">
                     <div class="card main-view">
                         <div class="card-header">
-                            <h2>Evolutionary Scaling Path</h2>
-                            <div class="badge warning">Roadmap</div>
+                            <h2>Leadership & CBT Integration</h2>
+                            <div class="badge warning">Soft Skills</div>
                         </div>
-
-                        <div class="phase-container">
-                            <div class="phase-item">
-                                <div class="phase-num">1</div>
-                                <div class="phase-content">
-                                    <h4>Phase 1: Foundation (1-10)</h4>
-                                    <p>Focus: PMF Validation, CIPC Registration, Basic SaaS stack.</p>
-                                </div>
-                            </div>
-                            <div class="phase-item">
-                                <div class="phase-num">2</div>
-                                <div class="phase-content">
-                                    <h4>Phase 2: Alignment (11-50)</h4>
-                                    <p>Focus: OKR implementation, Departmental permissions, HRIS automation.</p>
-                                </div>
-                            </div>
-                            <div class="phase-item">
-                                <div class="phase-num">3</div>
-                                <div class="phase-content">
-                                    <h4>Phase 3: Resilience (51+)</h4>
-                                    <p>Focus: Microservices, Evidence-based compliance, Culture scaling.</p>
-                                </div>
-                            </div>
+                        <p class="section-intro">Blending technical acumen with emotional intelligence through Cognitive
+                            Behavioural Therapy (CBT) coaching.</p>
+                        <div class="info-block mt-2">
+                            <h3>Executive Coaching</h3>
+                            <p>Leveraging CBT principles to support leadership development, team cohesion, and
+                                high-performance culture across global banking teams.</p>
                         </div>
                     </div>
-
                     <div class="card side-panel">
                         <div class="card-header">
-                            <h2>Action month 1</h2>
+                            <h2>Credentials</h2>
                         </div>
-                        <ul class="activity-feed">
-                            <li>Entity Formation (CIPC)</li>
-                            <li>Tax Readiness (SARS)</li>
-                            <li>Privacy Foundation (POPIA)</li>
-                            <li>Execution Loop (Agile)</li>
+                        <ul class="check-list">
+                            <li>National Diploma in IT (TUT)</li>
+                            <li>MBA-Equivalent Programs</li>
+                            <li>Certified CBT Practitioner</li>
+                            <li>Agile Certifications</li>
                         </ul>
                     </div>
                 </div>
