@@ -25,7 +25,10 @@ body {
     overflow-x: hidden;
 }
 
-h1, h2, h3, .logo-section {
+h1,
+h2,
+h3,
+.logo-section {
     font-family: 'Outfit', sans-serif;
 }
 
@@ -96,6 +99,22 @@ h1, h2, h3, .logo-section {
     border-radius: 12px 0 0 12px;
 }
 
+/* Mobile Toggle */
+.mobile-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 .sidebar-footer {
     padding-top: 2rem;
     border-top: 1px solid var(--glass-border);
@@ -149,6 +168,7 @@ h1, h2, h3, .logo-section {
     margin-bottom: 0.5rem;
     background: linear-gradient(to right, #fff, #94a3b8);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -218,9 +238,20 @@ h1, h2, h3, .logo-section {
     display: flex;
 }
 
-.stat-icon.purple { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
-.stat-icon.blue { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
-.stat-icon.green { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+.stat-icon.purple {
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--accent-purple);
+}
+
+.stat-icon.blue {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--accent-blue);
+}
+
+.stat-icon.green {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent-green);
+}
 
 .stat-data h3 {
     font-size: 1.75rem;
@@ -265,7 +296,11 @@ h1, h2, h3, .logo-section {
     font-weight: 600;
 }
 
-.badge.success { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); }
+.badge.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--accent-green);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
 
 .governance-list {
     display: flex;
@@ -299,8 +334,15 @@ h1, h2, h3, .logo-section {
     border-radius: 50%;
 }
 
-.status-indicator.success { background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
-.status-indicator.warning { background: var(--accent-warning); box-shadow: 0 0 10px var(--accent-warning); }
+.status-indicator.success {
+    background: var(--accent-green);
+    box-shadow: 0 0 10px var(--accent-green);
+}
+
+.status-indicator.warning {
+    background: var(--accent-warning);
+    box-shadow: 0 0 10px var(--accent-warning);
+}
 
 /* Activity Feed */
 .activity-feed {
@@ -325,8 +367,13 @@ h1, h2, h3, .logo-section {
     border-radius: 50%;
 }
 
-.activity-feed li .dot.blue { background: var(--accent-blue); }
-.activity-feed li .dot.purple { background: var(--accent-purple); }
+.activity-feed li .dot.blue {
+    background: var(--accent-blue);
+}
+
+.activity-feed li .dot.purple {
+    background: var(--accent-purple);
+}
 
 .activity-feed li p {
     font-size: 0.9rem;
@@ -342,16 +389,68 @@ h1, h2, h3, .logo-section {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.stat-card, .card, .top-header {
+.stat-card,
+.card,
+.top-header {
     animation: fadeIn 0.8s ease forwards;
 }
 
 @media (max-width: 1024px) {
     .dashboard-body {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        width: 280px;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 4rem 1.5rem 1.5rem 1.5rem;
+    }
+
+    .top-header {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .welcome h1 {
+        font-size: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-body {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 1.5rem;
     }
 }

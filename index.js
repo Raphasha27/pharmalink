@@ -36,10 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             navItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
-            
+
             const page = item.id.replace('nav-', '');
             console.log(`Navigating to ${page}`);
             // In a real app, this would change the content
         });
     });
+
+    // Mobile Menu Toggle Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (mobileMenuBtn && sidebar) {
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+
+            // Toggle icon between menu and close
+            if (sidebar.classList.contains('active')) {
+                mobileMenuBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+            } else {
+                mobileMenuBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+            }
+        });
+
+        // Close sidebar when clicking a nav item on mobile
+        const navItemsList = document.querySelectorAll('.nav-item');
+        navItemsList.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+                }
+            });
+        });
+    }
 });
