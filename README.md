@@ -62,7 +62,16 @@ Compliance:  POPIA, SAPC GPP Standards
 
 ---
 
-## 💻 Quick Start
+## 🛠️ Full-Stack Development Assets
+This repository contains production-ready scaffolds for the complete PharmaLink ecosystem:
+
+*   **[Comprehensive DB Schema](./pharmalink/backend/COMPREHENSIVE_SCHEMA.sql)**: Optimized PostgreSQL structure for Multi-tenancy, IoT, and Audit Logging.
+*   **[System Architecture](./ARCHITECTURE.md)**: Full high-level diagram and API endpoint design.
+*   **[Compliance Checklist](./COMPLIANCE_CHECKLIST.md)**: Mandatory SA regulatory guide (POPIA, SAPC, HIPAA).
+
+---
+
+## 🏎️ Quick Start (Local Setup)
 
 ### **Option 1: One-Click Launch (Windows)**
 ```powershell
