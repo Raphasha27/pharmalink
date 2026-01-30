@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Management System | Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </div>
+                <span>Antigravity GMS</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" id="nav-overview">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Overview
+                </a>
+                <a href="#" class="nav-item" id="nav-guidelines">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Guidelines
+                </a>
+                <a href="#" class="nav-item" id="nav-roadmap">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                    Roadmap
+                </a>
+                <a href="#" class="nav-item" id="nav-security">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Security
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">U</div>
+                    <div class="details">
+                        <p class="name">Administrator</p>
+                        <p class="status">System Online</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="welcome">
+                    <h1>Platform Governance</h1>
+                    <p>Central management for GitHub repository standards and automation.</p>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-secondary">System Logs</button>
+                    <button class="btn btn-primary" id="btn-deploy">Run Workflow</button>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <div class="stat-data">
+                        <h3>8</h3>
+                        <p>Core Repositories</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <div class="stat-data">
+                        <h3>98%</h3>
+                        <p>Compliance Score</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="stat-data">
+                        <h3>14</h3>
+                        <p>Active Workflows</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Area -->
+            <section class="dashboard-body">
+                <div class="card main-view">
+                    <div class="card-header">
+                        <h2>Repository Governance Status</h2>
+                        <div class="badge success">Active</div>
+                    </div>
+                    <div class="governance-list">
+                        <div class="gov-item">
+                            <div class="gov-info">
+                                <strong>CI/CD Integration</strong>
+                                <span>Status: Healthy • Last run: 2 mins ago</span>
+                            </div>
+                            <div class="status-indicator success"></div>
+                        </div>
+                        <div class="gov-item">
+                            <div class="gov-info">
+                                <strong>Security Protocols</strong>
+                                <span>Status: Automated • Scans: 0 Vulnerabilities</span>
+                            </div>
+                            <div class="status-indicator success"></div>
+                        </div>
+                        <div class="gov-item warning">
+                            <div class="gov-info">
+                                <strong>Documentation Update</strong>
+                                <span>Status: Pending • 3 files require review</span>
+                            </div>
+                            <div class="status-indicator warning"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card side-panel">
+                    <div class="card-header">
+                        <h2>Recent Activity</h2>
+                    </div>
+                    <ul class="activity-feed">
+                        <li>
+                            <span class="dot"></span>
+                            <p>Updated <strong>ci.yml</strong> to use GMS_TOKEN secret.</p>
+                            <small>Just now</small>
+                        </li>
+                        <li>
+                            <span class="dot blue"></span>
+                            <p>Created project <strong>.gitignore</strong> config.</p>
+                            <small>5 mins ago</small>
+                        </li>
+                        <li>
+                            <span class="dot purple"></span>
+                            <p>Platform Roadmap Q1 established.</p>
+                            <small>2 hours ago</small>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
