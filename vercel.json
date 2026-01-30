@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "cleanUrls": true,
     "builds": [
         {
             "src": "*.html",
@@ -14,6 +15,10 @@
         {
             "src": "/api/(.*)",
             "dest": "pharmalink/backend/src/index.js"
+        },
+        {
+            "src": "/demo",
+            "dest": "/demo.html"
         },
         {
             "src": "/(.*)",
