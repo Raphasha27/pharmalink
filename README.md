@@ -49,10 +49,22 @@ Support for specialized medication purchases via Paystack, integrated with major
 ---
 
 ## 🏎️ Local Infrastructure Setup
+
+### **Option 1: Modern React Experience (Vite)**
+The system now features a premium React + Framer Motion frontend for a cinematic healthcare experience.
+```powershell
+cd pharmalink/web
+npm install
+npm run dev
+```
+*Accessible at `http://localhost:5173`*
+
+### **Option 2: Legacy / One-Click Launch**
 ```powershell
 cd pharmalink
 ./START_PHARMALINK.ps1
 ```
+*Accessible at `http://localhost:3000` or `index.html`*
 
 ---
 *Developed for the National Health Insurance (NHI) digital transformation roadmap. 🇿🇦*

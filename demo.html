@@ -8,7 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
+        #map {
+            height: 300px;
+            width: 100%;
+            border-radius: 20px;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
         :root {
             --primary: #6366f1;
             --primary-glow: rgba(99, 102, 241, 0.5);
@@ -519,6 +529,9 @@
             <div class="logo-icon">🇿🇦</div>
             Health Dispatch
         </div>
+        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent); padding: 10px; border-radius: 12px; margin-top: 1rem; font-size: 0.75rem;">
+            <strong>MANDATE:</strong> Delivering chronic medication to reduced hospital lines.
+        </div>
         <nav>
             <ul id="dynamic-nav">
                 <!-- Nav items changed via JS based on persona -->
@@ -899,7 +912,9 @@
                                     </div>
                                 </div>
 
-                                <div style="margin-top: 5rem; display: flex; gap: 20px; justify-content: center;">
+                                <div id="map"></div>
+
+                                <div style="margin-top: 2rem; display: flex; gap: 20px; justify-content: center;">
                                     <div class="stat-card" style="width: 250px;">
                                         <div class="stat-label">Current Location</div>
                                         <div style="font-weight: 600;">Grayston Dr.</div>
@@ -974,6 +989,13 @@
                 patient: 'Medication Tracking'
             };
             document.getElementById('view-title').innerText = titles[persona];
+
+            // Initialize Maps based on view
+            if (persona === 'pharmacy') {
+                setTimeout(initAdminMap, 500);
+            } else if (persona === 'patient') {
+                // Patient map initializes after order is placed
+            }
         }
 
         // Initialize clock
@@ -1002,10 +1024,55 @@
             alert('🔐 Biometric Verification Success: Accessing Digital Signature for Schedule 5 Substance.');
         }
 
+        let activeMap = null;
+        let adminMap = null;
+
+        function initPatientMap() {
+            if (activeMap) activeMap.remove();
+            activeMap = L.map('map').setView([-26.1076, 28.0567], 13); // Sandton, SA
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(activeMap);
+            
+            const pharmacyIcon = L.divIcon({html: '🏥', className: 'map-icon', iconSize: [30, 30]});
+            const driverIcon = L.divIcon({html: '🚚', className: 'map-icon', iconSize: [30, 30]});
+            const homeIcon = L.divIcon({html: '🏠', className: 'map-icon', iconSize: [30, 30]});
+
+            L.marker([-26.1076, 28.0567], {icon: pharmacyIcon}).addTo(activeMap).bindPopup('Dispatch Facility');
+            const driverMarker = L.marker([-26.1150, 28.0600], {icon: driverIcon}).addTo(activeMap).bindPopup('Courier: Thabiso M.');
+            L.marker([-26.1200, 28.0700], {icon: homeIcon}).addTo(activeMap).bindPopup('Your Residence');
+
+            // Simulate driver movement
+            let lat = -26.1150;
+            setInterval(() => {
+                lat += 0.0001;
+                driverMarker.setLatLng([lat, 28.0600]);
+            }, 3000);
+        }
+
+        function initAdminMap() {
+            if (adminMap) adminMap.remove();
+            const mapEl = document.getElementById('admin-map');
+            if (!mapEl) return;
+            
+            adminMap = L.map('admin-map').setView([-26.2041, 28.0473], 11); // Johannesburg area
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(adminMap);
+
+            // Add multiple mock drivers
+            const locations = [
+                {coords: [-26.1076, 28.0567], label: 'Sandton Facility'},
+                {coords: [-26.1800, 28.0300], label: 'Soweto Fleet #04'},
+                {coords: [-26.2200, 28.0800], label: 'Alberton Fleet #09'}
+            ];
+
+            locations.forEach(loc => {
+                L.marker(loc.coords).addTo(adminMap).bindPopup(loc.label);
+            });
+        }
+
         function simulateOrder() {
             alert('📦 Order Placed Successfully! Initializing Secure Cold-Chain Pickup...');
             document.getElementById('patient-order-screen').style.display = 'none';
             document.getElementById('patient-tracking-screen').style.display = 'block';
+            setTimeout(initPatientMap, 500);
         }
 
         function openBank(bankName) {
