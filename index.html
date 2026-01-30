@@ -4,303 +4,1000 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fintech Strategic Ops Hub | Executive Dashboard</title>
-    <link rel="stylesheet" href="index.css">
+    <title>PharmaLink | Unified Logistics & Compliance</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.5);
+            --secondary: #ec4899;
+            --bg: #0b0f1a;
+            --sidebar-bg: rgba(15, 23, 42, 0.95);
+            --card-bg: rgba(30, 41, 59, 0.6);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 10%, hsla(225, 39%, 30%, 0.3) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 0.2) 0, transparent 50%);
+            color: var(--text);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* Persona Switcher Nav */
+        .persona-nav {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 0.5rem;
+            border-radius: 50px;
+            display: flex;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .persona-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .persona-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* Sidebar */
+        aside {
+            width: 280px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .nav-item {
+            padding: 0.875rem 1.25rem;
+            border-radius: 14px;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text);
+            transform: translateX(5px);
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+        }
+
+        /* Main Area */
+        main {
+            flex: 1;
+            padding: 2.5rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, white, var(--text-muted));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* View Container */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dashboard Components */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-trend {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .trend-up {
+            color: var(--accent);
+        }
+
+        .trend-down {
+            color: var(--danger);
+        }
+
+        /* Data Tables / Lists */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        td {
+            padding: 1.25rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-primary {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+        }
+
+        /* Bank Buttons */
+        .bank-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .bank-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* User Profile in Table */
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .small-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            padding: 2px;
+        }
+
+        /* Mobile View Simulation (Driver persona) */
+        .mobile-simulator {
+            max-width: 380px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 40px;
+            padding: 12px;
+            border: 4px solid #1e293b;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 9/19;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-screen {
+            background: var(--bg);
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .map-mock {
+            width: 100%;
+            height: 200px;
+            background: #1e293b;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/28.2293, -25.7479,12/400x200?access_token=mock');
+            background-size: cover;
+        }
+
+        .driver-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 10px var(--primary);
+            animation: ping 2s infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Cold Chain Indicator */
+        .temp-gauge {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .temp-status {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Biometric Button */
+        .biometric-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px -5px var(--primary-glow);
+        }
+
+        /* Patient View Specific */
+        .tracking-status {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .status-hero {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .stepper {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .stepper::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            position: relative;
+        }
+
+        .step.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .step-label {
+            position: absolute;
+            top: 50px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .step.active .step-label {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
 
 <body>
-    <button class="mobile-toggle" id="mobile-menu-btn">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    </button>
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo-section">
-                <div class="logo-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                        <line x1="1" y1="10" x2="23" y2="10"></line>
-                    </svg>
-                </div>
-                <span>FintechOps Hub</span>
-            </div>
 
-            <nav class="nav-links">
-                <a href="#" class="nav-item active" data-tab="ecosystem" id="nav-ecosystem">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                    </svg>
-                    Card Ecosystem
-                </a>
-                <a href="#" class="nav-item" data-tab="aml" id="nav-aml">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                    AML & KYC
-                </a>
-                <a href="#" class="nav-item" data-tab="programs" id="nav-programs">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                    Programs (PMO)
-                </a>
-                <a href="#" class="nav-item" data-tab="leadership" id="nav-leadership">
-                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    Leadership & CBT
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="user-info">
-                    <div class="avatar">T</div>
-                    <div class="details">
-                        <p class="name">Thabo</p>
-                        <p class="status">Global Head of CARD</p>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="top-header">
-                <div class="welcome">
-                    <h1>Strategic Operations</h1>
-                    <p>Managing Issuing, Acquiring, and Regulatory Compliance across ARO markets.</p>
-                </div>
-                <div class="actions">
-                    <button class="btn btn-secondary">Compliance Report</button>
-                    <button class="btn btn-primary" id="btn-deploy">Active Initiatives</button>
-                </div>
-            </header>
-
-            <!-- Stats Grid -->
-            <section class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon purple">
-                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
-                            fill="none">
-                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                            <line x1="1" y1="10" x2="23" y2="10"></line>
-                        </svg>
-                    </div>
-                    <div class="stat-data">
-                        <h3>99.9%</h3>
-                        <p>ATM/POS Uptime</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon blue">
-                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
-                            fill="none">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                    </div>
-                    <div class="stat-data">
-                        <h3>100%</h3>
-                        <p>AML Compliance</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon green">
-                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
-                            fill="none">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <div class="stat-data">
-                        <h3>16+ Yrs</h3>
-                        <p>Industry Expertise</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: Card Ecosystem -->
-            <section id="tab-ecosystem" class="tab-pane active">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>Card & Acquiring Ecosystem</h2>
-                            <div class="badge success">Active</div>
-                        </div>
-                        <div class="governance-list">
-                            <div class="gov-item">
-                                <div class="gov-info">
-                                    <strong>Virtual Card Implementation</strong>
-                                    <span>Leadership of FNB's pioneering virtual card programme.</span>
-                                </div>
-                                <div class="status-indicator success"></div>
-                            </div>
-                            <div class="gov-item">
-                                <div class="gov-info">
-                                    <strong>POS & E-commerce Infrastructure</strong>
-                                    <span>Managing global POS terminal networks and secure online payment
-                                        gateways.</span>
-                                </div>
-                                <div class="status-indicator success"></div>
-                            </div>
-                            <div class="gov-item">
-                                <div class="gov-info">
-                                    <strong>Tokenization Initiatives</strong>
-                                    <span>Rolling out card-on-file and device tokenization for mobile wallets.</span>
-                                </div>
-                                <div class="status-indicator success"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>Market Focus</h2>
-                        </div>
-                        <ul class="activity-feed">
-                            <li><span>Card Profitability Analysis</span></li>
-                            <li><span>ATM Network Expansion (ARO)</span></li>
-                            <li><span>Merchant Acquiring Strategy</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: AML & KYC -->
-            <section id="tab-aml" class="tab-pane">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>Anti-Money Laundering & KYC</h2>
-                            <div class="badge purple">Regulatory Oversight</div>
-                        </div>
-                        <p class="section-intro">Embedding stringent AML protocols into product and operational strategy
-                            to mitigate financial crime risks.</p>
-
-                        <div class="stack-list">
-                            <div class="stack-item">
-                                <div class="item-head"><strong>KYC Verification Flow</strong><span>Compliance</span>
-                                </div>
-                                <p>Automated customer due diligence and identity verification workflows.</p>
-                            </div>
-                            <div class="stack-item">
-                                <div class="item-head"><strong>Transaction Monitoring</strong><span>Security</span>
-                                </div>
-                                <p>Real-time screening of card and ATM transactions for suspicious activity.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>Key Regulators</h2>
-                        </div>
-                        <ul class="activity-feed">
-                            <li><strong>SARB Compliance</strong></li>
-                            <li><strong>FICA Compliance</strong></li>
-                            <li><strong>International AML Standards</strong></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: Programs (PMO) -->
-            <section id="tab-programs" class="tab-pane">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>Program Management Office</h2>
-                            <div class="badge blue">Agile Delivery</div>
-                        </div>
-                        <div class="table-container">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Project</th>
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>System Migrations</td>
-                                        <td>Program Manager</td>
-                                        <td>Completed</td>
-                                    </tr>
-                                    <tr>
-                                        <td>FNB Virtual Card</td>
-                                        <td>Lead Strategist</td>
-                                        <td>Launched</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tokenization Pilot</td>
-                                        <td>Executive Sponsor</td>
-                                        <td>Scaling</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>Methodology</h2>
-                        </div>
-                        <div class="info-block purple">
-                            <h4>Agile & Scrum</h4>
-                            <p>Transitioning from Waterfall to high-velocity Agile sprints for complex banking
-                                transformations.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Tab Content: Leadership -->
-            <section id="tab-leadership" class="tab-pane">
-                <div class="dashboard-body">
-                    <div class="card main-view">
-                        <div class="card-header">
-                            <h2>Leadership & CBT Integration</h2>
-                            <div class="badge warning">Soft Skills</div>
-                        </div>
-                        <p class="section-intro">Blending technical acumen with emotional intelligence through Cognitive
-                            Behavioural Therapy (CBT) coaching.</p>
-                        <div class="info-block mt-2">
-                            <h3>Executive Coaching</h3>
-                            <p>Leveraging CBT principles to support leadership development, team cohesion, and
-                                high-performance culture across global banking teams.</p>
-                        </div>
-                    </div>
-                    <div class="card side-panel">
-                        <div class="card-header">
-                            <h2>Credentials</h2>
-                        </div>
-                        <ul class="check-list">
-                            <li>National Diploma in IT (TUT)</li>
-                            <li>MBA-Equivalent Programs</li>
-                            <li>Certified CBT Practitioner</li>
-                            <li>Agile Certifications</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <div class="persona-nav">
+        <button class="persona-btn active" onclick="switchPersona('pharmacy')">Pharmacy</button>
+        <button class="persona-btn" onclick="switchPersona('doctor')">Doctor Portal</button>
+        <button class="persona-btn" onclick="switchPersona('driver')">Driver App</button>
+        <button class="persona-btn" onclick="switchPersona('patient')">Patient View</button>
     </div>
-    <script src="index.js"></script>
+
+    <aside id="main-sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            PharmaLink
+        </div>
+        <nav>
+            <ul id="dynamic-nav">
+                <!-- Nav items changed via JS based on persona -->
+            </ul>
+        </nav>
+
+        <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;">
+            <div class="user-cell">
+                <div class="small-avatar" style="background: var(--secondary);"></div>
+                <div>
+                    <div style="font-size: 0.875rem; font-weight: 600;">System Admin</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Sandton, GP</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <h1 id="view-title">Pharmacy Command Center</h1>
+            <div id="real-time-clock" style="color: var(--text-muted); font-size: 0.875rem; font-family: monospace;">
+            </div>
+        </header>
+
+        <!-- PHARMACY PORTAL VIEW -->
+        <div id="view-pharmacy" class="view-section active">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Daily Revenue</div>
+                    <div class="stat-value">R24,840.00</div>
+                    <div class="stat-trend trend-up">↑ 8.2% vs yesterday</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Active Couriers</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-trend">8 in delivery / 4 idle</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Pending Verifications</div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-trend trend-down">Needs urgent review</div>
+                </div>
+                <div class="stat-card" style="border-color: var(--danger);">
+                    <div class="stat-label">Temperature Alerts</div>
+                    <div class="stat-value" style="color: var(--danger);">1</div>
+                    <div class="stat-trend trend-down">Package #PL-992 (Linde St)</div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="table-header">
+                    <h2>Recent Deliveries</h2>
+                    <button class="persona-btn"
+                        style="background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary);">Filter by
+                        Area</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Recipient</th>
+                            <th>Medication Type</th>
+                            <th>Status</th>
+                            <th>Courier</th>
+                            <th>Cold Chain</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="user-cell">James Mokoena</div>
+                            </td>
+                            <td>Schedule 5 (Chronic)</td>
+                            <td><span class="badge badge-success">Delivered</span></td>
+                            <td>Sifiso D.</td>
+                            <td><span style="color: var(--accent);">4.1°C</span></td>
+                            <td>R1,250.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">Sarah White</div>
+                            </td>
+                            <td>Insulin (Fridge)</td>
+                            <td><span class="badge badge-primary">Processing</span></td>
+                            <td>Lindiwe K.</td>
+                            <td><span style="color: var(--warning);">2.8°C</span></td>
+                            <td>R890.00</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="user-cell">David Nkosi</div>
+                            </td>
+                            <td>Opioids (Critical)</td>
+                            <td><span class="badge badge-warning">En Route</span></td>
+                            <td>Michael B.</td>
+                            <td><span style="color: var(--accent);">3.9°C</span></td>
+                            <td>R3,400.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DOCTOR PORTAL VIEW -->
+        <div id="view-doctor" class="view-section">
+            <div class="content-card" style="max-width: 800px; margin: 0 auto;">
+                <h2 style="margin-bottom: 2rem;">Digital Prescription Submission</h2>
+                <form id="script-form" onsubmit="event.preventDefault(); simulateScriptSubmission();"
+                    style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Patient
+                                Name</label>
+                            <input type="text" placeholder="e.g. David Nkosi"
+                                style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">ID Number
+                                (SA)</label>
+                            <input type="text" placeholder="9001015000081"
+                                style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--text-muted);">Medication /
+                            Dosage</label>
+                        <textarea rows="4" placeholder="e.g. Metformin 500mg, 1 tablet twice daily"
+                            style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white;"></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="checkbox" id="urgent-scr">
+                        <label for="urgent-scr">Refrigeration Required (Cold Chain)</label>
+                    </div>
+
+                    <div
+                        style="background: rgba(99, 102, 241, 0.1); padding: 1rem; border-radius: 12px; border: 1px dashed var(--primary);">
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Your digital signature will be appended
+                            to this script automatically for HPCSA compliance.</p>
+                    </div>
+
+                    <button type="submit" class="biometric-btn"
+                        style="width: auto; align-self: flex-start; padding: 15px 40px;">Issue Digital Script</button>
+                </form>
+            </div>
+
+            <div class="content-card" style="margin-top: 2rem;">
+                <h3>Recent Submissions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Patient</th>
+                            <th>Medication</th>
+                            <th>Date</th>
+                            <th>Pharmacy Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lethabo Zulu</td>
+                            <td>Schedule 4 Antibiotcs</td>
+                            <td>Today, 10:15</td>
+                            <td><span class="badge badge-success">Received</span></td>
+                        </tr>
+                        <tr>
+                            <td>Maria Smith</td>
+                            <td>Insulin Glargine</td>
+                            <td>Yesterday</td>
+                            <td><span class="badge badge-primary">Processing</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DRIVER MOBILE VIEW -->
+        <div id="view-driver" class="view-section">
+            <div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 40px;">
+                <div class="mobile-simulator">
+                    <div class="mobile-screen">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <span style="font-size: 0.75rem;">9:41</span>
+                            <span
+                                style="background: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: 0.6rem;">ONLINE</span>
+                        </div>
+
+                        <h3 style="margin-bottom: 10px;">Current Task</h3>
+                        <div
+                            style="background: var(--card-bg); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                            <div style="font-weight: 600;">#PL-9901 - Sandton Medical</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">15th St, Parkmore</div>
+                        </div>
+
+                        <div class="map-mock">
+                            <div class="driver-dot" style="top: 100px; left: 150px;"></div>
+                        </div>
+
+                        <div class="temp-gauge">
+                            <div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted);">BAG TEMPERATURE</div>
+                                <div class="temp-status" id="mobile-temp">3.8°C</div>
+                            </div>
+                            <div style="color: var(--accent);">● SECURE</div>
+                        </div>
+
+                        <div style="font-size: 0.9rem; margin-top: 20px;">
+                            <p><strong>Recipient:</strong> David Nkosi</p>
+                            <p style="color: var(--warning);">⚠️ Controlled Substance: Requires ID + Biometric Scan</p>
+                        </div>
+
+                        <button class="biometric-btn" onclick="simulateFingerprint()">Complete Delivery</button>
+                    </div>
+                </div>
+
+                <div style="max-width: 400px;">
+                    <h3>Driver Logic (Chain of Custody)</h3>
+                    <p style="color: var(--text-muted); margin: 1rem 0;">The driver app handles the most sensitive part
+                        of the journey. In this prototype, we simulate:</p>
+                    <ul style="color: var(--text-muted); display: flex; flex-direction: column; gap: 15px;">
+                        <li><strong>IoT Integration:</strong> Bags are equipped with BLE sensors. Temperature is logged
+                            to the blockchain/immutable ledger every 30 seconds.</li>
+                        <li><strong>Geofencing:</strong> Deliveries can only be marked "Complete" when the driver's GPS
+                            is within 50 meters of the delivery destination.</li>
+                        <li><strong>Biometric Unlock:</strong> For Schedule 6+ meds, the delivery sequence triggers a
+                            FaceID/TouchID prompt for the recipient.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PATIENT VIEW -->
+        <div id="view-patient" class="view-section">
+            <div id="patient-order-screen">
+                <div class="content-card" style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="margin-bottom: 2rem; text-align: center;">Order Your Medication</h2>
+
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div
+                            style="border: 2px dashed rgba(255,255,255,0.1); padding: 3rem; text-align: center; border-radius: 20px;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">📄</div>
+                            <p>Upload your Prescription (PDF/Photo)</p>
+                            <button class="persona-btn" style="background: var(--primary); margin-top: 1rem;">Browse
+                                Files</button>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="stat-card" style="cursor: pointer;">
+                                <h4>Chronic Refill</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Quick reorder of your monthly
+                                    meds.</p>
+                            </div>
+                            <div class="stat-card" style="cursor: pointer;">
+                                <h4>Over-the-Counter</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Vitamins, pain relief, etc.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: rgba(99, 102, 241, 0.1); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--primary);">
+                            <h4 style="margin-bottom: 0.5rem;">Medical Aid Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <select class="bank-btn" style="text-align: left; font-size: 0.8rem;">
+                                    <option>Discovery Health</option>
+                                    <option>GEMS</option>
+                                    <option>Bonitas</option>
+                                    <option>Momentum</option>
+                                    <option>Not on Medical Aid</option>
+                                </select>
+                                <input type="text" placeholder="Member Number"
+                                    style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px; color: white; font-size: 0.8rem;">
+                            </div>
+                        </div>
+
+                        <div id="billing-summary" style="padding: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: var(--text-muted);">Medication Total</span>
+                                <span>R1,050.00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: var(--text-muted);">Medical Aid Cover (Est)</span>
+                                <span style="color: var(--accent);">-R965.00</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.1rem; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                                <span>Total Co-payment</span>
+                                <span>R85.00</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                            <h4 style="margin-bottom:1rem; text-align:center;">Scan to Pay / Instant EFT</h4>
+                            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                                <div
+                                    style="width: 120px; height: 120px; background: white; padding: 10px; border-radius: 12px;">
+                                    <!-- QR Code Mock -->
+                                    <div
+                                        style="width: 100%; height: 100%; background: url('https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg'); background-size: cover;">
+                                    </div>
+                                </div>
+                            </div>
+                            <p
+                                style="font-size: 0.8rem; text-align: center; color: var(--text-muted); margin-bottom: 1rem;">
+                                Select your bank to complete payment securely:</p>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;"
+                                id="bank-selector">
+                                <button class="bank-btn" onclick="openBank('capitec')">Capitec</button>
+                                <button class="bank-btn" onclick="openBank('fnb')">FNB</button>
+                                <button class="bank-btn" onclick="openBank('absa')">ABSA</button>
+                                <button class="bank-btn" onclick="openBank('nedbank')">Nedbank</button>
+                                <button class="bank-btn" onclick="openBank('tymebank')">Tyme</button>
+                                <button class="bank-btn" onclick="openBank('standard')">Standard</button>
+                            </div>
+                        </div>
+
+                        <button class="biometric-btn" onclick="simulateOrder()">Confirm Order & Notify Driver</button>
+
+                        <div id="patient-tracking-screen" style="display: none; margin-top: 2rem;">
+                            <!-- Tracking code (Existing Content) -->
+                            <div class="content-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                                <div class="status-hero">ETA: 12 Minutes</div>
+                                <p style="color: var(--text-muted);">Your medication is being delivered by
+                                    <strong>Thabiso
+                                        M.</strong>
+                                </p>
+
+                                <div class="stepper">
+                                    <div class="step active">1 <div class="step-label">Ordered</div>
+                                    </div>
+                                    <div class="step active">2 <div class="step-label">Verified</div>
+                                    </div>
+                                    <div class="step active">3 <div class="step-label">On the way</div>
+                                    </div>
+                                    <div class="step">4 <div class="step-label">Delivered</div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 5rem; display: flex; gap: 20px; justify-content: center;">
+                                    <div class="stat-card" style="width: 250px;">
+                                        <div class="stat-label">Current Location</div>
+                                        <div style="font-weight: 600;">Grayston Dr.</div>
+                                    </div>
+                                    <div class="stat-card" style="width: 250px;">
+                                        <div class="stat-label">Bag Integrity</div>
+                                        <div style="font-weight: 600; color: var(--accent);">Optimized (3.9°C)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    </main>
+
+    <script>
+        const personaNavItems = {
+            pharmacy: [
+                { label: 'Dashboard', icon: '⬚', active: true },
+                { label: 'Live Tracking', icon: '⦿' },
+                { label: 'Inventory', icon: '☰' },
+                { label: 'Finances', icon: 'R' },
+                { label: 'Compliance Audit', icon: '🛡️' }
+            ],
+            doctor: [
+                { label: 'E-Prescribe', icon: '✍️', active: true },
+                { label: 'Patient Files', icon: '📂' },
+                { label: 'Script History', icon: '↻' },
+                { label: 'Settings', icon: '⚙️' }
+            ],
+            driver: [
+                { label: 'Active Task', icon: '🚚', active: true },
+                { label: 'Order History', icon: '↻' },
+                { label: 'Vehicle Health', icon: '⚡' },
+                { label: 'Earnings', icon: 'R' }
+            ],
+            patient: [
+                { label: 'Order Meds', icon: '🛒', active: true },
+                { label: 'Track Delivery', icon: '📍' },
+                { label: 'My Prescriptions', icon: '💊' },
+                { label: 'Payment Methods', icon: '💳' },
+                { label: 'Support', icon: '?' }
+            ]
+        };
+
+        function switchPersona(persona) {
+            // Update buttons
+            document.querySelectorAll('.persona-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase().includes(persona)) btn.classList.add('active');
+            });
+
+            // Update Views
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(`view-${persona}`).classList.add('active');
+
+            // Update Sidebar Nav
+            const nav = document.getElementById('dynamic-nav');
+            nav.innerHTML = personaNavItems[persona].map(item => `
+                <li class="nav-item ${item.active ? 'active' : ''}">
+                    <i>${item.icon}</i>
+                    ${item.label}
+                </li>
+            `).join('');
+
+            // Update Title
+            const titles = {
+                pharmacy: 'Pharmacy Command Center',
+                doctor: 'Clinical Prescription Terminal',
+                driver: 'Driver Logistics Terminal',
+                patient: 'Medication Tracking'
+            };
+            document.getElementById('view-title').innerText = titles[persona];
+        }
+
+        // Initialize clock
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('real-time-clock').innerText = now.toLocaleString('en-ZA', {
+                timeZone: 'Africa/Johannesburg',
+                dateStyle: 'medium',
+                timeStyle: 'medium'
+            }).toUpperCase();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Simulate Temperature Fluctuations
+        setInterval(() => {
+            const tempEl = document.getElementById('mobile-temp');
+            if (tempEl) {
+                let current = parseFloat(tempEl.innerText);
+                let change = (Math.random() - 0.5) * 0.2;
+                tempEl.innerText = (current + change).toFixed(1) + '°C';
+            }
+        }, 3000);
+
+        function simulateFingerprint() {
+            alert('🔐 Biometric Verification Success: Accessing Digital Signature for Schedule 5 Substance.');
+        }
+
+        function simulateOrder() {
+            alert('📦 Order Placed Successfully! Initializing Secure Cold-Chain Pickup...');
+            document.getElementById('patient-order-screen').style.display = 'none';
+            document.getElementById('patient-tracking-screen').style.display = 'block';
+        }
+
+        function openBank(bankName) {
+            const deepLinks = {
+                capitec: 'capitec://',
+                fnb: 'fnb://',
+                absa: 'absa://',
+                nedbank: 'nedbank://',
+                tymebank: 'tymebank://',
+                standard: 'standardbank://'
+            };
+
+            alert(`🔗 Deep-linking to ${bankName.toUpperCase()} Banking App...\n\nIn a real mobile environment, this would trigger the Ozow/Paystack iEFT flow or open the banking app directly.`);
+
+            // Simulation of deep link attempt
+            window.location.href = deepLinks[bankName] || '#';
+
+            // Follow up with order simulation after a delay
+            setTimeout(() => {
+                if (confirm(`Assume payment was successful in the ${bankName} app?`)) {
+                    simulateOrder();
+                }
+            }, 2000);
+        }
+
+        function simulateScriptSubmission() {
+            alert('🚀 Digital Script Issued! \n\nThe prescription has been securely hashed and transmitted directly to the Pharmalink Pharmacy Network. The patient will receive an SMS to complete the delivery order.');
+        }
+
+        // Init
+        switchPersona('pharmacy');
+    </script>
 </body>
 
 </html>
+```
