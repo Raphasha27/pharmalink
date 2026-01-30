@@ -2,13 +2,11 @@
 
 <div align="center">
 
-![PharmaLink Banner](https://img.shields.io/badge/PharmaLink-2026-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Live%20MVP-success?style=for-the-badge)
-![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
+### **Revolutionizing Medication Delivery in South Africa 🇿🇦**
 
-**Revolutionizing Medication Delivery in South Africa 🇿🇦**
-
-[Live Demo](#) • [Documentation](docs/) • [Case Study](#case-study)
+[![Status](https://img.shields.io/badge/Status-Live%20MVP-success)](https://raphasha27.github.io/pharmalink/)
+[![License](https://img.shields.io/badge/License-Proprietary-red)](LICENSE)
+[![South Africa](https://img.shields.io/badge/Built%20for-South%20Africa-green)](https://github.com/Raphasha27/pharmalink)
 
 </div>
 
@@ -26,10 +24,12 @@
 ### 🟢 The Solution
 A unified engine connecting clinical scripts directly to patients' doorsteps:
 
-1. 👨‍⚕️ **Doctor Portal** - Digital script issuance with secure hashing
-2. 🏥 **Pharmacy Command Center** - Multi-tenant order fulfillment
-3. 🚗 **Driver Mobile Terminal** - IoT cold-chain monitoring + biometric handoff
-4. 🏠 **Patient Marketplace** - One-click ordering with ZAR payments
+| **Persona** | **Function** |
+|-------------|--------------|
+| 👨‍⚕️ **Doctor Portal** | Digital script issuance with secure hashing |
+| 🏥 **Pharmacy Command Center** | Multi-tenant order fulfillment & driver dispatch |
+| 🚗 **Driver Mobile Terminal** | IoT cold-chain monitoring + biometric handoff |
+| 🏠 **Patient Marketplace** | One-click ordering with ZAR payments |
 
 ---
 
@@ -39,59 +39,56 @@ A unified engine connecting clinical scripts directly to patients' doorsteps:
 Mobile FaceID/TouchID integration ensures Schedule 6+ substances reach verified recipients only.
 
 ### ❄️ IoT Cold-Chain Monitoring
-Real-time telemetry tracks bag temperatures (2°C - 8°C). Breaches trigger instant WebSocket alerts.
+Real-time telemetry tracks bag temperatures (2°C - 8°C). Breaches trigger instant WebSocket alerts to pharmacies.
 
 ### 💳 ZAR Financial Engine
-- **Medical Aid Billing:** EDI switching for Discovery, GEMS, Bonitas
-- **Paystack Integration:** Deep-linking to SA banking apps (Capitec, FNB, ABSA)
+- **Medical Aid Billing:** EDI switching for Discovery, GEMS, Bonitas, Momentum
+- **Paystack Integration:** Deep-linking to SA banking apps (Capitec, FNB, ABSA, Nedbank)
 
 ### 📦 Inventory Management
-Live stock tracking with expiry alerts and low-stock notifications.
+Live stock tracking with expiry alerts and low-stock notifications for chronic medications.
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Frontend**
-- HTML5, CSS3 (Glassmorphism)
-- Vanilla JavaScript
-
-**Backend**
-- Node.js + Express
-- Socket.io (Real-time updates)
-- PostgreSQL
-- JWT Authentication
-
-**Security**
-- Role-Based Access Control (RBAC)
-- SHA-256 Biometric Hashing
-- POPIA Compliance Framework
+```
+Frontend:    HTML5, CSS3 (Glassmorphism), Vanilla JavaScript
+Backend:     Node.js, Express, Socket.io
+Database:    PostgreSQL (Time-series optimized)
+Security:    JWT, RBAC, SHA-256 Hashing
+Compliance:  POPIA, SAPC GPP Standards
+```
 
 ---
 
 ## 💻 Quick Start
 
-### One-Click Launch (Windows)
+### **Option 1: One-Click Launch (Windows)**
 ```powershell
 cd pharmalink
 ./START_PHARMALINK.ps1
 ```
 
-This will:
-1. ✅ Start backend API on `http://localhost:3000`
-2. ✅ Open dashboard in your browser
-3. ✅ Keep both services running
+**What this does:**
+- ✅ Starts backend API on `http://localhost:3000`
+- ✅ Opens dashboard in your default browser
+- ✅ Keeps both services running simultaneously
 
-### Manual Setup
+### **Option 2: Manual Setup**
 ```bash
-# Install dependencies
+# 1. Install dependencies
 cd pharmalink/backend
 npm install
 
-# Start backend
+# 2. Configure environment
+cp .env.example .env
+# Edit .env with your database credentials
+
+# 3. Start backend
 npm start
 
-# Open frontend
+# 4. Open frontend
 start ../index.html
 ```
 
@@ -99,35 +96,59 @@ start ../index.html
 
 ## 📈 Development Roadmap
 
-- ✅ **Week 1:** Core Infrastructure & RBAC
-- ✅ **Week 2:** Clinical & Pharmacy Integration
-- ✅ **Week 3:** ZAR Monetization & Bank Integration
-- ✅ **Week 4:** Real-time GPS & IoT Simulation
-- ✅ **Week 5:** Biometric Security Hardening
-- ✅ **Week 6:** UAT & Production Launch
+| **Phase** | **Milestone** | **Status** |
+|-----------|---------------|------------|
+| Week 1 | Core Infrastructure & RBAC | ✅ Complete |
+| Week 2 | Clinical & Pharmacy Integration | ✅ Complete |
+| Week 3 | ZAR Monetization & Banking | ✅ Complete |
+| Week 4 | Real-time GPS & IoT Simulation | ✅ Complete |
+| Week 5 | Biometric Security Hardening | ✅ Complete |
+| Week 6 | UAT & Production Launch | 🟡 In Progress |
 
 ---
 
-## 📄 Documentation
+## 📚 Documentation
 
-- [Security Policy](pharmalink/docs/SECURITY_POLICY.md) - POPIA compliance framework
-- [Strategy](pharmalink/docs/STRATEGY.md) - Business model & market positioning
-- [Medical Aid Billing](pharmalink/docs/MEDICAL_AID_BILLING.md) - EDI integration guide
-- [Database Setup](pharmalink/docs/LIVE_DATABASE_SETUP.md) - PostgreSQL deployment
+| **Document** | **Description** |
+|--------------|-----------------|
+| [Security Policy](pharmalink/docs/SECURITY_POLICY.md) | POPIA compliance framework |
+| [Business Strategy](pharmalink/docs/STRATEGY.md) | Market positioning & revenue model |
+| [Medical Aid Billing](pharmalink/docs/MEDICAL_AID_BILLING.md) | EDI integration guide (MediSwitch) |
+| [Database Setup](pharmalink/docs/LIVE_DATABASE_SETUP.md) | PostgreSQL cloud deployment |
+
+---
+
+## 🎯 Use Cases
+
+1. **Chronic Medication Delivery**
+   - Patient orders monthly diabetes medication via app
+   - Medical Aid covers 90%, patient pays R85 co-payment
+   - Driver tracks cold-chain compliance for insulin delivery
+
+2. **Controlled Substance Handling**
+   - Doctor issues digital script for Schedule 6 opioid
+   - Pharmacy verifies prescription authenticity
+   - Biometric verification required at delivery (no signature = no handoff)
+
+3. **Emergency Script Fulfillment**
+   - Patient uploads photo of paper script
+   - Pharmacy validates and dispatches within 2 hours
+   - Real-time tracking with 12-minute ETA updates
 
 ---
 
 ## 🎓 Author
 
-**Raphasha** - *Lead HealthTech Architect*
+**Raphasha** - *Lead HealthTech Architect*  
+Building compliant, patient-first solutions for South African healthcare.
 
-Built with focus on South African regulatory compliance (SAPC / POPIA).
+📧 Contact: [GitHub Profile](https://github.com/Raphasha27)
 
 ---
 
 ## 📜 License
 
-Proprietary - All rights reserved © 2026 PharmaLink
+Proprietary © 2026 PharmaLink. All rights reserved.
 
 ---
 
@@ -136,5 +157,9 @@ Proprietary - All rights reserved © 2026 PharmaLink
 **🇿🇦 Proudly South African 🇿🇦**
 
 *Transforming medication delivery, one script at a time.*
+
+---
+
+**[View Live Demo](https://raphasha27.github.io/pharmalink/)** • **[Report Issues](https://github.com/Raphasha27/pharmalink/issues)**
 
 </div>
