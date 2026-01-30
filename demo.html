@@ -1038,7 +1038,7 @@
         // --- BACKEND CONNECTION LOGIC ---
         const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:3000'
-            : 'https://pharmalink-backend.up.railway.app'; 
+            : window.location.origin; 
 
         async function checkBackendStatus() {
             const statusEl = document.getElementById('connection-status');
