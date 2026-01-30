@@ -35,6 +35,10 @@ const App = () => {
   const [isAdjudicating, setIsAdjudicating] = useState(false);
   const [selectedScheme, setSelectedScheme] = useState('Discovery Health');
   const [isBiometricActive, setIsBiometricActive] = useState(false);
+  
+  // New state for Pharmacist flow
+  const [verifyingOrder, setVerifyingOrder] = useState(null);
+  const [verifiedOrders, setVerifiedOrders] = useState([]);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -96,6 +100,16 @@ const App = () => {
       { id: 'history', label: 'Medical History', icon: History },
       { id: 'payment', label: 'Payment Hub', icon: CreditCard },
     ],
+    pharmacist: [
+      { id: 'verify', label: 'Prescription Inbox', icon: ShieldCheck },
+      { id: 'stock', label: 'Inventory Control', icon: Activity },
+      { id: 'dispense', label: 'Audit Trail', icon: History },
+    ],
+    driver: [
+      { id: 'task', label: 'Active Dispatch', icon: Truck },
+      { id: 'route', label: 'Route Map', icon: MapPin },
+      { id: 'handover', label: 'Vehicle Health', icon: Activity },
+    ],
     admin: [
       { id: 'fleet', label: 'Fleet Management', icon: Activity },
       { id: 'inventory', label: 'National Stock', icon: ShieldCheck },
@@ -103,6 +117,13 @@ const App = () => {
       { id: 'compliance', label: 'Audit Logs', icon: ShieldCheck },
     ]
   };
+
+  const personaOptions = [
+    { id: 'citizen', label: 'Citizen', icon: User },
+    { id: 'pharmacist', label: 'Pharmacist', icon: ShieldCheck },
+    { id: 'driver', label: 'Driver', icon: Truck },
+    { id: 'admin', label: 'Facility Admin', icon: Activity },
+  ];
 
   return (
     <div className="min-h-screen flex bg-[#030712] text-slate-50 overflow-hidden font-sans">
@@ -126,7 +147,7 @@ const App = () => {
         </div>
 
         <nav className="flex-1 px-4 py-4 space-y-2">
-          {navItems[activePersona === 'citizen' ? 'citizen' : 'admin'].map((item) => (
+          {navItems[activePersona].map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.label)}
@@ -140,11 +161,20 @@ const App = () => {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-white/5">
-          <button onClick={() => setActivePersona(activePersona === 'citizen' ? 'admin' : 'citizen')} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 transition-colors">
-            <ShieldCheck className="w-5 h-5" />
-            {isSidebarOpen && <span className="text-sm font-bold">Switch to {activePersona === 'citizen' ? 'Facility' : 'Citizen'}</span>}
-          </button>
+        <div className="p-4 border-t border-white/5 space-y-2">
+          {isSidebarOpen && <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-4 mb-2">Switch Identity</p>}
+          <div className="grid grid-cols-1 gap-1">
+            {personaOptions.map(p => (
+              <button 
+                key={p.id}
+                onClick={() => setActivePersona(p.id)}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${activePersona === p.id ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'hover:bg-white/5 text-slate-400'}`}
+              >
+                <p.icon className="w-5 h-5" />
+                {isSidebarOpen && <span className="text-sm font-bold">{p.label}</span>}
+              </button>
+            ))}
+          </div>
         </div>
       </motion.aside>
 
@@ -170,18 +200,16 @@ const App = () => {
           </div>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar relative">
           <AnimatePresence mode="wait">
-            {activePersona === 'citizen' ? (
+            {activePersona === 'citizen' && (
               <motion.div key="citizen-view" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="max-w-6xl mx-auto space-y-8">
+                {/* ... existing citizen UI ... */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                   <div>
                     <h2 className="text-3xl font-bold">Good Evening, Citizen</h2>
                     <p className="text-slate-400">Your chronic medication is ready for dispatch.</p>
                   </div>
-                  <button onClick={() => { setOrderStatus('en-route'); alert("NHI: Order Confirmed. Dispatching from local facility..."); }} className="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-xl shadow-emerald-500/20 transition-all active:scale-95">
-                    Confirm Home Delivery
-                  </button>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -217,7 +245,6 @@ const App = () => {
                       </MapContainer>
                     </div>
 
-                    {/* Integrated Adjudication Section */}
                     <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-6">
                         <div className="flex items-center justify-between mb-6">
                             <h3 className="text-xl font-bold">Medical Aid Benefit Check</h3>
@@ -276,31 +303,6 @@ const App = () => {
                   </div>
 
                   <div className="space-y-6">
-                    <div className="bg-indigo-600/10 border border-indigo-500/20 rounded-3xl p-6 space-y-4">
-                      <div className="flex items-center gap-3">
-                        <AlertCircle className="w-6 h-6 text-indigo-400" />
-                        <h3 className="font-bold text-lg">Next Refill</h3>
-                      </div>
-                      <p className="text-sm text-slate-400">Your Metformin supply is low. We have pre-approved a delivery for March 15th.</p>
-                    </div>
-
-                    <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-6 space-y-4">
-                      <h3 className="font-bold">Active Prescription</h3>
-                      <div className="space-y-3">
-                        {adjudication ? adjudication.items.map((item, i) => (
-                          <div key={i} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
-                            <span className="text-sm">{item.name}</span>
-                            <span className="text-xs font-bold text-emerald-500">R{item.cost}</span>
-                          </div>
-                        )) : ['Metformin 500mg', 'Amlodipine 5mg'].map((med) => (
-                           <div key={med} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
-                             <span className="text-sm">{med}</span>
-                             <ShieldCheck className="w-4 h-4 text-emerald-500" />
-                           </div>
-                         ))}
-                      </div>
-                    </div>
-
                     <button 
                         onClick={() => {
                             if (!adjudication) {
@@ -321,8 +323,243 @@ const App = () => {
                   </div>
                 </div>
               </motion.div>
-            ) : (
+            )}
+
+            {activePersona === 'pharmacist' && (
+              <motion.div key="pharmacist-view" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="max-w-6xl mx-auto space-y-8">
+                 <div className="flex justify-between items-center">
+                    <div>
+                        <h2 className="text-3xl font-bold">Pharmacist Dispatch Terminal</h2>
+                        <p className="text-slate-400">Reviewing digitized chronic prescriptions for NHI patients.</p>
+                    </div>
+                    <div className="flex gap-4">
+                        <div className="bg-white/5 px-4 py-2 rounded-xl border border-white/5 text-sm">
+                            <span className="text-slate-500 mr-2">Status:</span>
+                            <span className="text-emerald-400 font-bold">Registry Active</span>
+                        </div>
+                    </div>
+                 </div>
+
+                 <div className="bg-[#0f172a]/50 border border-white/5 rounded-3xl overflow-hidden">
+                    <table className="w-full border-collapse">
+                        <thead>
+                            <tr className="bg-white/5 text-left">
+                                <th className="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Patient</th>
+                                <th className="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Medication</th>
+                                <th className="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">OCR Confidence</th>
+                                <th className="p-4 text-xs font-bold text-slate-500 uppercase tracking-widest">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/5">
+                            {[
+                                { id: 'SCR-9921', name: 'Zanele Khumalo', med: 'Metformin 500mg', confidence: '98%', urgency: 'Chronic' },
+                                { id: 'SCR-9922', name: 'Peter Bosch', med: 'Amlodipine 5mg', confidence: '94%', urgency: 'Chronic' },
+                                { id: 'SCR-9923', name: 'Maria Van Wyk', med: 'Insulin Glargine', confidence: '97%', urgency: 'High' }
+                            ].map((order) => (
+                                <tr key={order.id} className="hover:bg-white/5 transition-colors group">
+                                    <td className="p-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold">{order.name[0]}</div>
+                                            <div>
+                                                <p className="font-bold">{order.name}</p>
+                                                <p className="text-xs text-slate-500">{order.id}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="p-4 text-sm font-medium">{order.med}</td>
+                                    <td className="p-4">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                                <div className="h-full bg-emerald-500" style={{ width: order.confidence }} />
+                                            </div>
+                                            <span className="text-xs font-mono">{order.confidence}</span>
+                                        </div>
+                                    </td>
+                                    <td className="p-4">
+                                        <button 
+                                            onClick={() => setVerifyingOrder(order)}
+                                            className="px-4 py-2 bg-indigo-600/20 hover:bg-indigo-600 text-indigo-400 hover:text-white text-xs font-bold rounded-lg transition-all"
+                                        >
+                                            Verify Script
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                 </div>
+
+                 {/* Verification Modal UI */}
+                 {verifyingOrder && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                        <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onClick={() => setVerifyingOrder(null)} />
+                        <motion.div 
+                            initial={{ scale: 0.95, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="w-full max-w-2xl bg-[#1e293b] border border-white/10 rounded-3xl p-8 relative shadow-2xl overflow-hidden"
+                        >
+                            <div className="flex justify-between items-start mb-8">
+                                <div>
+                                    <h3 className="text-2xl font-bold">Clinical Verification</h3>
+                                    <p className="text-slate-400">Order Ref: {verifyingOrder.id}</p>
+                                </div>
+                                <div className="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold">OCR Digitized</div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-8 mb-8">
+                                <div className="space-y-4">
+                                    <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Prescribed Medication</p>
+                                        <p className="text-lg font-bold">{verifyingOrder.med}</p>
+                                    </div>
+                                    <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Patient Identity</p>
+                                        <p className="text-lg font-bold">{verifyingOrder.name}</p>
+                                        <p className="text-xs text-slate-400">SA ID Verified via DHA Integration</p>
+                                    </div>
+                                </div>
+                                <div className="bg-slate-900 border border-white/5 rounded-2xl p-6 relative overflow-hidden flex items-center justify-center">
+                                    <div className="absolute inset-0 opacity-10 flex flex-col items-center justify-center">
+                                        {[...Array(20)].map((_, i) => <div key={i} className="w-full h-2 border-b border-indigo-500" />)}
+                                    </div>
+                                    <div className="relative text-center">
+                                        <div className="w-12 h-12 border-2 border-indigo-500 rounded-lg mx-auto mb-3 flex items-center justify-center">
+                                            <Activity className="w-6 h-6 text-indigo-400" />
+                                        </div>
+                                        <p className="text-xs font-bold text-indigo-400">Prescription Scan Preview</p>
+                                        <p className="text-[10px] text-slate-500 italic mt-1">Source: Clinical Portal #832</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl mb-8 flex items-center gap-4">
+                                <AlertCircle className="w-8 h-8 text-amber-500 shrink-0" />
+                                <div>
+                                    <p className="font-bold text-amber-400 text-sm">Clinical AI Check Initialized</p>
+                                    <p className="text-xs text-slate-400">No drug-drug interactions detected for current patient profile.</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <button onClick={() => setVerifyingOrder(null)} className="py-4 bg-white/5 hover:bg-white/10 text-slate-400 font-bold rounded-2xl transition-all">Cancel</button>
+                                <button 
+                                    onClick={() => {
+                                        alert("✅ Prescription Verified. Package sent to Robotic Dispensing Unit.");
+                                        setVerifiedOrders([...verifiedOrders, verifyingOrder.id]);
+                                        setVerifyingOrder(null);
+                                    }}
+                                    className="py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-emerald-500/20"
+                                >
+                                    Approve and Dispense
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                 )}
+              </motion.div>
+            )}
+
+            {activePersona === 'driver' && (
+              <motion.div key="driver-view" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="max-w-6xl mx-auto space-y-8 h-full flex flex-col">
+                 <div className="flex justify-between items-center shrink-0">
+                    <div>
+                        <h2 className="text-3xl font-bold">Dispatch Operations</h2>
+                        <p className="text-slate-400">Active delivery task for National Health Dispatch.</p>
+                    </div>
+                 </div>
+
+                 {orderStatus === 'delivered' ? (
+                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center space-y-6">
+                        <div className="w-24 h-24 bg-emerald-500 rounded-full flex items-center justify-center shadow-2xl shadow-emerald-500/40">
+                            <ShieldCheck className="w-12 h-12 text-white" />
+                        </div>
+                        <div>
+                            <h3 className="text-4xl font-bold">Mission Accomplished</h3>
+                            <p className="text-slate-400 text-lg mt-2">Delivery #DH-482 handoff complete. Ledger synchronized.</p>
+                        </div>
+                        <button 
+                            onClick={() => setOrderStatus('idle')}
+                            className="px-8 py-3 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl font-bold transition-all"
+                        >
+                            Return to Base
+                        </button>
+                    </motion.div>
+                 ) : (
+                    <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8 min-h-0">
+                        <div className="lg:col-span-2 bg-[#0f172a]/50 border border-white/5 rounded-3xl p-6 h-full overflow-hidden relative">
+                            <MapContainer center={INITIAL_DRIVER_COORDS} zoom={14} className="h-full w-full rounded-2xl overflow-hidden z-0">
+                                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                                <Marker position={PATIENT_COORDS} icon={L.divIcon({html: '🏠', className: 'marker-icon', iconSize: [30, 30]})} />
+                                <Marker position={INITIAL_DRIVER_COORDS} icon={L.divIcon({html: '🚚', className: 'marker-icon', iconSize: [30, 30]})} />
+                            </MapContainer>
+                        </div>
+                        
+                        <div className="space-y-6 flex flex-col min-h-0 overflow-y-auto custom-scrollbar">
+                            <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-8 space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center">
+                                        <Truck className="w-6 h-6 text-indigo-400" />
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Active Task</p>
+                                        <p className="text-lg font-bold">Delivery #DH-482</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Recipient</span>
+                                        <span className="font-bold text-white">Zanele Khumalo</span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Distance</span>
+                                        <span className="font-bold text-white">1.2 km</span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-sm">
+                                        <span className="text-slate-400">Temperature</span>
+                                        <span className="font-bold text-emerald-400">3.2°C (OK)</span>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 border-t border-white/5">
+                                    <p className="text-xs text-slate-500 font-bold uppercase tracking-widest mb-4">Handover Verification</p>
+                                    <div className="space-y-3 mb-6">
+                                        {[
+                                            'Seal Integrity Checked',
+                                            'Cold Chain Maintained',
+                                            'Recipient Geofence Validated'
+                                        ].map((check, i) => (
+                                            <div key={i} className="flex items-center gap-3 text-sm">
+                                                <div className="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center">
+                                                    <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                                                </div>
+                                                <span className="text-slate-300">{check}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <button 
+                                        onClick={() => {
+                                            alert("🏁 Geofence Success: Driver location matches recipient residence. Initiating handover sequence.");
+                                            setTimeout(() => {
+                                                setOrderStatus('delivered');
+                                            }, 1000);
+                                        }}
+                                        className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
+                                    >
+                                        Verify Finish & Handover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 )}
+              </motion.div>
+            )}
+
+            {activePersona === 'admin' && (
               <motion.div key="admin-view" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="max-w-6xl mx-auto space-y-8">
+                 {/* ... existing admin UI ... */}
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {[
                         { label: 'Queue Reduction', value: '14,204', trend: '↑ 24%' },
