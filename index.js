@@ -29,17 +29,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Simple navigation switching
+    // Simple navigation switching (Tabs)
     const navItems = document.querySelectorAll('.nav-item');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
+            const tabId = item.getAttribute('data-tab');
+            if (!tabId) return;
+
+            // Update Nav Items
             navItems.forEach(i => i.classList.remove('active'));
             item.classList.add('active');
 
-            const page = item.id.replace('nav-', '');
-            console.log(`Navigating to ${page}`);
-            // In a real app, this would change the content
+            // Update Tab Panes
+            tabPanes.forEach(pane => pane.classList.remove('active'));
+            const targetPane = document.getElementById(`tab-${tabId}`);
+            if (targetPane) targetPane.classList.add('active');
+
+            console.log(`Switched to tab: ${tabId}`);
         });
     });
 
