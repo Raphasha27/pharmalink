@@ -72,8 +72,9 @@ cd pharmalink
 
 **What this does:**
 - ✅ Starts backend API on `http://localhost:3000`
-- ✅ Opens dashboard in your default browser
-- ✅ Keeps both services running simultaneously
+- ✅ Opens the **PharmaLink Ecosystem Hub** (Landing Page)
+- ✅ Allows you to launch individual portals (Pharmacy, Doctor, Driver, Patient)
+- ✅ Monitors system health in real-time
 
 ### **Option 2: Manual Setup**
 ```bash
