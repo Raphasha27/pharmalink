@@ -162,34 +162,43 @@ const App = () => {
                exit={{ opacity: 0 }}
                className="space-y-6"
             >
-              {/* Mandate Banner from Screenshot */}
-              <div className="p-6 rounded-3xl bg-emerald-500/10 border border-emerald-500/20">
-                <p className="text-[12px] font-bold text-emerald-400/80 leading-relaxed uppercase tracking-wider">
-                  <span className="text-emerald-400">MANDATE:</span> Delivering chronic medication to reduced hospital lines.
-                </p>
-              </div>
+              <div className="space-y-4">
+                <div className="flex flex-col gap-6">
+                  <div className="px-2">
+                    <h3 className="text-4xl font-black tracking-tight text-white mb-2">Service Hub</h3>
+                    <p className="text-slate-500 text-sm font-medium">Select a logistics protocol to begin.</p>
+                  </div>
+                  
+                  {/* Mandate Banner from Screenshot */}
+                  <div className="p-8 rounded-[2.5rem] bg-emerald-500/5 border border-emerald-500/10 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity blur-3xl" />
+                    <p className="text-[11px] font-black text-emerald-400/90 leading-relaxed uppercase tracking-[0.15em] relative z-10">
+                      <span className="bg-emerald-400 text-slate-950 px-2 py-0.5 rounded-sm mr-2">MANDATE</span> 
+                      Delivering chronic medication to reduced hospital lines.
+                    </p>
+                  </div>
 
-              {/* Navigation Blocks as requested */}
-              <div className="flex flex-col gap-4">
-                {navItems[activePersona].map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => {
-                        setActiveSection(item.id);
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="w-full p-8 rounded-[2.5rem] glass-card flex items-center gap-8 group active:scale-[0.98] transition-all text-left relative overflow-hidden"
-                  >
-                    <div className={`p-5 rounded-2xl bg-${item.color}-500/10 group-hover:bg-${item.color}-500/20 transition-colors`}>
-                      <item.icon className={`w-8 h-8 text-${item.color}-400`} />
-                    </div>
-                    <div>
-                        <h4 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">{item.label}</h4>
-                        <p className="text-xs text-slate-500 font-medium uppercase tracking-widest mt-1">Access Service</p>
-                    </div>
-                    <ChevronRight className="ml-auto w-6 h-6 text-slate-700 opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0" />
-                  </button>
-                ))}
+                  {navItems[activePersona].map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                          setActiveSection(item.id);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="w-full py-12 px-10 rounded-[3rem] glass-card flex items-center gap-10 group active:scale-[0.97] transition-all text-left relative overflow-hidden border-white/5 hover:border-white/20"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className={`p-6 rounded-3xl bg-${item.color}-500/10 group-hover:bg-${item.color}-500/20 transition-all group-hover:scale-110 relative z-10`}>
+                        <item.icon className={`w-10 h-10 text-${item.color}-400`} />
+                      </div>
+                      <div className="relative z-10">
+                          <h4 className="text-2xl font-black text-white group-hover:text-indigo-400 transition-all">{item.label}</h4>
+                          <p className={`text-[10px] text-${item.color}-400/60 font-black uppercase tracking-[0.2em] mt-1.5`}>Secure Protocol Active</p>
+                      </div>
+                      <ChevronRight className="ml-auto w-8 h-8 text-slate-700 opacity-20 group-hover:opacity-100 group-hover:text-indigo-400 transition-all -translate-x-4 group-hover:translate-x-0 relative z-10" />
+                    </button>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ) : (
