@@ -789,37 +789,46 @@ const App = () => {
                 </p>
               </div>
 
-              <div className="flex-1 overflow-y-auto space-y-10 pr-2 custom-scrollbar">
-                {/* 3-Step Protocol Flow */}
-                <div className="space-y-4 relative">
-                  <div className="absolute left-6 top-8 bottom-8 w-[2px] bg-gradient-to-b from-indigo-500/50 via-indigo-500/20 to-transparent" />
+              <div className="flex-1 overflow-y-auto space-y-8 pr-2 custom-scrollbar">
+                {/* 3-Step Clinical Protocol Bundle */}
+                <div className="bg-white/5 rounded-[2.5rem] border border-white/5 p-6 space-y-6 relative overflow-hidden group hover:border-indigo-500/30 transition-colors">
+                  <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <Activity className="w-12 h-12" />
+                  </div>
                   
-                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-12 mb-6">Service Protocol</p>
-                  
-                  {[
-                    { id: 'order', label: 'Order Meds', step: '01', desc: 'Digital Request', icon: ShoppingCart },
-                    { id: 'track', label: 'Track Delivery', step: '02', desc: 'Live Logistics', icon: MapPin },
-                    { id: 'history', label: 'My Prescriptions', step: '03', desc: 'Registry Audit', icon: History }
-                  ].map((item, idx) => (
-                    <motion.button 
-                      key={item.id}
-                      onClick={() => { setActiveSection(item.id); setIsMenuOpen(false); }}
-                      className={`w-full flex items-center gap-6 p-2 rounded-2xl transition-all relative z-10 ${activeSection === item.id ? 'group' : 'opacity-60 hover:opacity-100'}`}
-                    >
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xs border ${activeSection === item.id ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg shadow-indigo-600/40' : 'bg-slate-900 border-white/5 text-slate-500'}`}>
-                        {item.step}
-                      </div>
-                      <div className="text-left">
-                        <p className={`text-sm font-black tracking-tight ${activeSection === item.id ? 'text-white' : 'text-slate-400'}`}>{item.label}</p>
-                        <p className="text-[10px] text-slate-500 font-bold uppercase">{item.desc}</p>
-                      </div>
-                    </motion.button>
-                  ))}
+                  <div className="space-y-1">
+                    <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Clinical Protocol</p>
+                    <h4 className="text-sm font-bold text-white">Service Bundle v2.0</h4>
+                  </div>
+
+                  <div className="space-y-2 relative">
+                    <div className="absolute left-5 top-5 bottom-5 w-[1px] bg-white/10" />
+                    
+                    {[
+                      { id: 'order', label: 'Order Meds', step: '01', icon: ShoppingCart, color: 'indigo' },
+                      { id: 'track', label: 'Track Delivery', step: '02', icon: MapPin, color: 'emerald' },
+                      { id: 'history', label: 'My Prescriptions', step: '03', icon: History, color: 'blue' }
+                    ].map((item) => (
+                      <button 
+                        key={item.id}
+                        onClick={() => { setActiveSection(item.id); setIsMenuOpen(false); }}
+                        className={`w-full flex items-center gap-4 p-3 rounded-2xl transition-all relative z-10 ${activeSection === item.id ? 'bg-white/10 shadow-lg' : 'hover:bg-white/5'}`}
+                      >
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-[10px] border transition-all ${activeSection === item.id ? 'bg-indigo-600 border-indigo-400 text-white' : 'bg-slate-900 border-white/5 text-slate-500'}`}>
+                          {item.step}
+                        </div>
+                        <div className="text-left">
+                          <p className={`text-sm font-bold tracking-tight ${activeSection === item.id ? 'text-white' : 'text-slate-400'}`}>{item.label}</p>
+                          <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Secure Protocol</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Secondary Tools */}
-                <div className="space-y-3 pt-6 border-t border-white/5">
-                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Authorized Tools</p>
+                <div className="space-y-2 pt-4">
+                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4 mb-2">Authorized Tools</p>
                   {[
                     { id: 'payment', label: 'Payment Methods', icon: CreditCard },
                     { id: 'support', label: 'Clinical Support', icon: HelpCircle }
@@ -827,24 +836,24 @@ const App = () => {
                     <button 
                       key={tool.id}
                       onClick={() => tool.id === 'support' ? handleSupportChat() : setActiveSection(tool.id)}
-                      className="w-full flex items-center gap-4 p-4 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 transition-colors"
+                      className="w-full flex items-center gap-4 p-4 rounded-2xl text-slate-500 hover:text-white hover:bg-white/5 transition-all"
                     >
-                      <tool.icon className="w-5 h-5" />
+                      <tool.icon className="w-5 h-5 flex-shrink-0" />
                       <span className="font-bold text-xs tracking-tight">{tool.label}</span>
                     </button>
                   ))}
                 </div>
 
                 <div className="pt-6 border-t border-white/5 space-y-3">
-                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Access Level</p>
+                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Access Authority</p>
                   {personaOptions.map(p => (
                     <button 
                       key={p.id}
                       onClick={() => { handlePersonaChange(p.id); setIsMenuOpen(false); }}
-                      className={`w-full flex items-center gap-4 p-4 rounded-xl transition-colors ${activePersona === p.id ? 'bg-indigo-600/20 text-indigo-400' : 'text-slate-500 hover:text-white'}`}
+                      className={`w-full flex items-center gap-4 p-4 rounded-xl transition-colors ${activePersona === p.id ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/20' : 'text-slate-500 hover:text-white'}`}
                     >
                       <p.icon className="w-4 h-4" />
-                      <span className="font-bold text-[10px] uppercase tracking-wider">{p.label}</span>
+                      <span className="font-bold text-[10px] uppercase tracking-widest">{p.label}</span>
                     </button>
                   ))}
                 </div>
