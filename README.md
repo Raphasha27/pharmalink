@@ -8,7 +8,7 @@
 
 ### 🚀 Live Demo
 The application is now live on Vercel:
-👉 **[PharmaLink Live Command Center](https://pharmalink-eta.vercel.app)** 
+👉 **[PharmaLink Live Command Center](https://pharmalink-eix8i5b26-koketso-raphashas-projects.vercel.app)** 
 
 #### 🔑 Authorized Access (Demo Mode):
 - **Authorized ID**: `demo@pharmalink.com`
