@@ -285,7 +285,7 @@ const App = () => {
                exit={{ opacity: 0 }}
                className="space-y-6"
             >
-              <div className="p-12 rounded-[3.5rem] bg-indigo-500/5 border border-indigo-500/10 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
+              <div className="p-10 rounded-[3.5rem] bg-indigo-500/5 border border-indigo-500/10 flex flex-col items-center text-center space-y-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8">
                   <Activity className="w-6 h-6 text-indigo-500/40" />
                 </div>
@@ -294,10 +294,10 @@ const App = () => {
                   <ShieldCheck className="w-12 h-12 text-indigo-400" />
                 </div>
                 
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-black text-white tracking-tight">System Operational</h3>
-                  <p className="text-slate-500 text-sm max-w-[250px] mx-auto leading-relaxed">
-                    Access all logistics and clinical services via the main menu.
+                <div className="space-y-4">
+                  <h3 className="text-3xl font-black text-white tracking-tight leading-tight">Ending Healthcare Queues<br /><span className="text-indigo-400">Through Direct Delivery</span></h3>
+                  <p className="text-slate-500 text-sm max-w-[400px] mx-auto leading-relaxed">
+                    A national infrastructure project designed to reduce lines at public healthcare facilities. Clinics are for checkups; prescriptions are for home delivery.
                   </p>
                 </div>
 
@@ -306,19 +306,23 @@ const App = () => {
                   onClick={() => setIsMenuOpen(true)}
                   className="px-10 py-5 bg-indigo-600 text-white rounded-[2rem] font-bold text-sm shadow-2xl shadow-indigo-600/40 hover:bg-indigo-500 transition-colors"
                 >
-                  Explore Services
+                  Launch Service Portal
                 </motion.button>
               </div>
 
-              {/* Protocol Overview */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-8 rounded-[2.5rem] bg-indigo-500/5 border border-white/5 space-y-1">
-                  <p className="text-[10px] font-black text-indigo-400/60 uppercase tracking-widest font-mono">STATUS</p>
-                  <p className="text-xl font-bold text-white">Optimal</p>
-                </div>
-                <div className="p-8 rounded-[2.5rem] bg-emerald-500/5 border border-white/5 space-y-1">
-                  <p className="text-[10px] font-black text-emerald-400/60 uppercase tracking-widest font-mono">SECURITY</p>
-                  <p className="text-xl font-bold text-white">Active</p>
+              {/* Mandate & Quick Stats */}
+              <div className="grid grid-cols-1 gap-4">
+                <div className="p-8 rounded-[2.5rem] bg-emerald-500/5 border border-emerald-500/10 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                      <Activity className="w-4 h-4 text-emerald-400" />
+                    </div>
+                    <p className="text-[11px] font-black text-emerald-500 uppercase tracking-widest">National Mandate</p>
+                  </div>
+                  <h4 className="text-xl font-bold text-white">Queue Reduction Target</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">
+                    Our mandate is to remove 2 million daily visits from outpatient clinics, freeing up clinical space for critical care and emergencies.
+                  </p>
                 </div>
               </div>
             </motion.div>
