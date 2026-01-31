@@ -789,31 +789,54 @@ const App = () => {
                 </p>
               </div>
 
-              <div className="flex-1 overflow-y-auto space-y-6 pr-2 custom-scrollbar">
-                <div className="space-y-2">
-                  {navItems[activePersona].map(item => (
-                    <button 
+              <div className="flex-1 overflow-y-auto space-y-10 pr-2 custom-scrollbar">
+                {/* 3-Step Protocol Flow */}
+                <div className="space-y-4 relative">
+                  <div className="absolute left-6 top-8 bottom-8 w-[2px] bg-gradient-to-b from-indigo-500/50 via-indigo-500/20 to-transparent" />
+                  
+                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-12 mb-6">Service Protocol</p>
+                  
+                  {[
+                    { id: 'order', label: 'Order Meds', step: '01', desc: 'Digital Request', icon: ShoppingCart },
+                    { id: 'track', label: 'Track Delivery', step: '02', desc: 'Live Logistics', icon: MapPin },
+                    { id: 'history', label: 'My Prescriptions', step: '03', desc: 'Registry Audit', icon: History }
+                  ].map((item, idx) => (
+                    <motion.button 
                       key={item.id}
                       onClick={() => { setActiveSection(item.id); setIsMenuOpen(false); }}
-                      className={`w-full flex items-center gap-5 p-5 rounded-2xl transition-colors ${activeSection === item.id ? 'bg-indigo-500/10 text-indigo-400' : 'bg-transparent text-slate-400 hover:bg-white/5'}`}
+                      className={`w-full flex items-center gap-6 p-2 rounded-2xl transition-all relative z-10 ${activeSection === item.id ? 'group' : 'opacity-60 hover:opacity-100'}`}
                     >
-                      <item.icon className={`w-6 h-6 ${activeSection === item.id ? 'text-indigo-400' : 'text-slate-500'}`} />
-                      <span className="text-base font-bold tracking-tight">{item.label}</span>
-                    </button>
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-xs border ${activeSection === item.id ? 'bg-indigo-600 border-indigo-400 text-white shadow-lg shadow-indigo-600/40' : 'bg-slate-900 border-white/5 text-slate-500'}`}>
+                        {item.step}
+                      </div>
+                      <div className="text-left">
+                        <p className={`text-sm font-black tracking-tight ${activeSection === item.id ? 'text-white' : 'text-slate-400'}`}>{item.label}</p>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase">{item.desc}</p>
+                      </div>
+                    </motion.button>
                   ))}
-                  
-                  {/* Universal Support Link */}
-                  <button 
-                    onClick={() => { handleSupportChat(); setIsMenuOpen(false); }}
-                    className="w-full flex items-center gap-5 p-5 rounded-2xl text-slate-400 hover:bg-white/5 transition-colors"
-                  >
-                    <HelpCircle className="w-6 h-6 text-slate-500" />
-                    <span className="text-base font-bold tracking-tight">Support</span>
-                  </button>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 space-y-3">
-                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Switch Role</p>
+                {/* Secondary Tools */}
+                <div className="space-y-3 pt-6 border-t border-white/5">
+                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Authorized Tools</p>
+                  {[
+                    { id: 'payment', label: 'Payment Methods', icon: CreditCard },
+                    { id: 'support', label: 'Clinical Support', icon: HelpCircle }
+                  ].map(tool => (
+                    <button 
+                      key={tool.id}
+                      onClick={() => tool.id === 'support' ? handleSupportChat() : setActiveSection(tool.id)}
+                      className="w-full flex items-center gap-4 p-4 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <tool.icon className="w-5 h-5" />
+                      <span className="font-bold text-xs tracking-tight">{tool.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="pt-6 border-t border-white/5 space-y-3">
+                  <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest ml-4">Access Level</p>
                   {personaOptions.map(p => (
                     <button 
                       key={p.id}
@@ -821,7 +844,7 @@ const App = () => {
                       className={`w-full flex items-center gap-4 p-4 rounded-xl transition-colors ${activePersona === p.id ? 'bg-indigo-600/20 text-indigo-400' : 'text-slate-500 hover:text-white'}`}
                     >
                       <p.icon className="w-4 h-4" />
-                      <span className="font-bold text-xs">{p.label}</span>
+                      <span className="font-bold text-[10px] uppercase tracking-wider">{p.label}</span>
                     </button>
                   ))}
                 </div>
