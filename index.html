@@ -3,397 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>National Health Dispatch | PharmaLink Government Utility</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>PharmaLink | Rebuilding</title>
     <style>
-        :root {
-            --primary: #1e3a8a; /* Government Blue */
-            --primary-glow: rgba(30, 58, 138, 0.5);
-            --secondary: #b45309; /* Official Gold/Amber */
-            --bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.6);
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #10b981;
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        h1, h2, h3, h4, .logo {
-            font-family: 'Outfit', sans-serif;
-        }
-
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(30, 58, 138, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(180, 83, 9, 0.1) 0%, transparent 40%);
-        }
-
-        /* Particles/Glows */
-        .glow {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: var(--primary-glow);
-            filter: blur(120px);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.2;
-            pointer-events: none;
-        }
-
-        /* Header */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(16px);
-            border-bottom: 2px solid var(--primary);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            border-radius: 8px;
+            background: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            box-shadow: 0 0 15px var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links a:hover {
-            color: var(--text);
-        }
-
-        .btn-login {
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.6rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .btn-login:hover {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            height: 100vh;
+            margin: 0;
             text-align: center;
-            padding: 0 10%;
-            padding-top: 120px;
         }
-
-        .govt-stamp {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text);
-            border: 1px solid var(--glass-border);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .container {
+            max-width: 600px;
+            padding: 2rem;
         }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: white;
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #4f46e5, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .hero h1 span {
-            color: var(--accent);
-        }
-
-        .hero p {
-            color: var(--text-muted);
+        p {
+            color: #94a3b8;
             font-size: 1.2rem;
-            max-width: 800px;
-            margin-bottom: 3rem;
             line-height: 1.6;
         }
-
-        .cta-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            padding: 1.2rem 2.8rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            background: #0ea672;
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.05);
-            color: white;
-            padding: 1.2rem 2.8rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: white;
-        }
-
-        /* Mission Section */
-        .mission {
-            padding: 100px 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .mission-item {
-            background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            text-align: left;
-        }
-
-        .mission-item h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .mission-item p {
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        /* Healthcare Status */
-        .system-check {
-            padding: 60px 5%;
-            background: #000;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.8rem 2rem;
-            background: #111827;
-            border-radius: 12px;
-            border: 1px solid #1f2937;
-        }
-
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background: #ef4444;
-            border-radius: 50%;
-        }
-
-        .pulse-dot.online {
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-            animation: pulse 2s infinite;
-        }
-
-        /* Footer */
-        footer {
-            padding: 4rem 10%;
-            background: #070b14;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-text {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.8rem; }
-            .cta-group { flex-direction: column; width: 100%; }
-            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+        .badge {
+            display: inline-block;
+            background: rgba(79, 70, 229, 0.1);
+            color: #818cf8;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(79, 70, 229, 0.2);
         }
     </style>
 </head>
 <body>
-    <div class="glow" style="top: -100px; left: -100px;"></div>
-    
-    <nav>
-        <div class="logo">
-            <div class="logo-icon">🇿🇦</div>
-            PharmaLink | National Health
-        </div>
-        <ul class="nav-links">
-            <li><a href="#mission">Our Mandate</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="demo.html?p=pharmacy">Control Center</a></li>
-        </ul>
-        <a href="demo.html?p=patient" class="btn-login">Citizen Login</a>
-    </nav>
-
-    <section class="hero">
-        <div class="govt-stamp">Department of Health Utility | National Health Insurance Ready</div>
-        <h1>Ending Healthcare Queues <br> <span>Through Direct Delivery</span></h1>
-        <p>A national infrastructure project designed to reduce lines at public healthcare facilities. Clinics are for checkups; prescriptions are for home delivery. Specialized care for the elderly and chronic disease patients across public and private sectors.</p>
-        
-        <div class="cta-group">
-            <a href="demo.html?p=patient" class="btn-primary">
-                <span>📦 Collect My Chronic Medication</span>
-            </a>
-            <a href="demo.html?p=doctor" class="btn-secondary">
-                <span>👵 Register Elderly Dependent</span>
-            </a>
-        </div>
-
-        <div class="system-check" style="margin-top: 5rem; background: transparent;">
-            <div class="status-pill">
-                <div id="status-dot" class="pulse-dot"></div>
-                <span id="status-text" style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Connecting to National Health Network...</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="mission" id="mission">
-        <div class="mission-item">
-            <h3>📉 Queue Reduction</h3>
-            <p>Our mandate is to remove 2 million daily visits from outpatient clinics. By delivering chronic meds directly to citizens, we free up doctors for critical checkups and emergencies.</p>
-        </div>
-        <div class="mission-item">
-            <h3>👵 Elderly Care First</h3>
-            <p>We prioritize the vulnerable. Our door-to-door network ensures senior citizens receive their lifesaving treatment without the physical strain of hospital travel.</p>
-        </div>
-        <div class="mission-item">
-            <h3>🏢 Sector Integration</h3>
-            <p>We bridge the gap between Public and Private. Utilizing a unified logistics fleet, we assist both government clinics and private hospitals with secure medication transport.</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-text">
-            &copy; 2026 National Health Dispatch Infrastructure. Built for the People of South Africa. 🇿🇦
-        </div>
-        <div style="display: flex; gap: 20px;">
-            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 0.8rem;">POPIA Policy</a>
-            <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 0.8rem;">NHI Integration</a>
-        </div>
-    </footer>
-
-    <script>
-        const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'http://localhost:3000'
-            : window.location.origin; 
-
-        async function checkStatus() {
-            const dot = document.getElementById('status-dot');
-            const text = document.getElementById('status-text');
-            
-            try {
-                const response = await fetch(API_BASE_URL + '/api/auth/health-check').catch(() => null);
-                if (response && response.status === 200) {
-                    dot.classList.add('online');
-                    text.innerText = "NHI Dispatch System Online";
-                    text.style.color = "var(--accent)";
-                } else {
-                    throw new Error('Offline');
-                }
-            } catch (e) {
-                dot.classList.remove('online');
-                text.innerText = "Offline Mode (Local Infrastructure Only)";
-                text.style.color = "#94a3b8";
-            }
-        }
-        checkStatus();
-        setInterval(checkStatus, 30000);
-    </script>
+    <div class="container">
+        <div class="badge">🇿🇦 National Health Infrastructure</div>
+        <h1>PharmaLink is <br> Being Rebuilt</h1>
+        <p>This system is currently undergoing a strategic architectural overhaul to better support direct medication delivery and queue reduction mandates.</p>
+        <p style="margin-top: 2rem; font-size: 0.9rem; font-style: italic;">Status: Under Development (NHI Ready)</p>
+    </div>
 </body>
 </html>
