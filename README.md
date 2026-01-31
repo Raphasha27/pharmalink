@@ -1,19 +1,26 @@
 # 🇿🇦 PharmaLink | National Health Dispatch 
 
-### 🏗️ Status: Under Development
+### 🏗️ Status: v1.0 Operational (Clinical Hub Edition)
 
-This repository is currently being rebuilt to better serve the National Health Insurance (NHI) digital transformation roadmap.
-
-**PharmaLink** is a national infrastructure project designed to decouple medication dispensing from clinical checkups, prioritizing chronic medication delivery to reduce healthcare queues.
+**PharmaLink** has been successfully re-engineered into a premium, full-screen clinical dashboard. This version features integrated mock data and a secure authentication gateway.
 
 ---
 
-### 🚧 What's Happening?
-- **Re-engineering**: We are restructuring the core AI logistics engine and clinical verification framework.
-- **Enhanced Security**: Implementing deeper biometric auditing and SAPC/POPIA compliance protocols.
-- **New Architecture**: Moving towards a more robust multi-tool framework for healthcare professionals and citizens.
+### 🚀 Live Demo
+The application is now live on Vercel:
+👉 **[PharmaLink Live Command Center](https://pharmalink-eta.vercel.app)** 
 
-**Check back soon for the updated platform.**
+#### 🔑 Authorized Access (Demo Mode):
+- **Authorized ID**: `demo@pharmalink.com`
+- **Access Code**: `admin123`
+
+---
+
+### 📦 Key Features
+- **Integrated Mock Backend**: Real-time clinical data fetching and stateful refill logic.
+- **Responsive Clinical Dashboard**: optimized for Desktop & Mobile with top-level command navigation.
+- **Cinematic Experience**: Framer-motion driven transitions and premium medical aesthetics.
+- **NHI Ready**: Built following the National Health Insurance digital roadmap.
 
 ---
 *Developed for the National Health Insurance (NHI) roadmap. 🇿🇦*
