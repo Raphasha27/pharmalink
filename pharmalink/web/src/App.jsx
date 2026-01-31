@@ -77,6 +77,17 @@ const App = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Dispatch Fleet Movement Simulation
+  useEffect(() => {
+    const moveFleet = setInterval(() => {
+      setDriverPos(prev => [
+        prev[0] + (Math.random() - 0.5) * 0.0005,
+        prev[1] + (Math.random() - 0.5) * 0.0005
+      ]);
+    }, 3000);
+    return () => clearInterval(moveFleet);
+  }, []);
+
   const personaOptions = [
     { id: 'citizen', label: 'Citizen View', icon: User, desc: 'Patient Logistics' },
     { id: 'pharmacist', label: 'Clinical Portal', icon: ShieldCheck, desc: 'Script Verification' },
@@ -607,35 +618,78 @@ const App = () => {
                     </Section>
                   )}
                   {activeSection === 'logistics_ai' && (
-                    <Section title="Predictive Logistics" subtitle="Neural Route Map" icon={MapPin} accent="emerald">
-                       <div className="p-10 border border-emerald-500/10 rounded-[2.5rem] bg-emerald-500/5 space-y-4">
-                          <div className="flex justify-between items-center text-white">
-                             <p className="text-sm font-bold">Traffic Optimization</p>
-                             <span className="text-[10px] bg-emerald-500 text-black px-2 py-0.5 rounded-full font-black">94% EFFICIENCY</span>
+                    <Section title="Neural Optimizer" subtitle="Fleet Intelligence" icon={MapPin} accent="emerald">
+                       <div className="space-y-6">
+                          <div className="p-8 border border-emerald-500/10 rounded-[2.5rem] bg-emerald-500/5 relative overflow-hidden">
+                             <div className="flex justify-between items-start mb-8 relative z-10">
+                                <div>
+                                   <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Active Optimization</p>
+                                   <h4 className="text-xl font-bold text-white">Route Batch #8812</h4>
+                                </div>
+                                <div className="px-3 py-1 bg-emerald-500 text-black text-[10px] font-black rounded-full">LIVE PREDICTION</div>
+                             </div>
+                             
+                             <div className="space-y-4 relative z-10">
+                                {[
+                                  { label: 'Traffic Density Analysis', val: '98%', status: 'Stable' },
+                                  { label: 'Battery/Range Management', val: '100%', status: 'Optimal' },
+                                  { label: 'Patient Urgency Weight', val: '0.84', status: 'Priority' }
+                                ].map((stat, i) => (
+                                  <div key={i} className="flex justify-between items-center bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                     <p className="text-xs text-slate-400">{stat.label}</p>
+                                     <div className="text-right">
+                                        <p className="text-xs font-bold text-white leading-none">{stat.val}</p>
+                                        <p className="text-[9px] text-emerald-500 uppercase font-black">{stat.status}</p>
+                                     </div>
+                                  </div>
+                                ))}
+                             </div>
+                             
+                             <div className="mt-8 p-6 bg-emerald-500 text-black rounded-2xl flex items-center justify-between shadow-xl shadow-emerald-500/20">
+                                <div>
+                                   <p className="text-[10px] font-black uppercase">Optimized Efficiency</p>
+                                   <p className="text-3xl font-black italic">+14.2%</p>
+                                </div>
+                                <Activity className="w-10 h-10 opacity-30" />
+                             </div>
                           </div>
-                          <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-                             <div className="h-full bg-emerald-500 w-[94%]" />
+                          <div className="px-6 py-4 bg-white/5 rounded-2xl flex items-center gap-4 border border-white/5">
+                             <Info className="w-5 h-5 text-slate-500" />
+                             <p className="text-[10px] text-slate-500 font-medium italic leading-relaxed">Logistics AI is reducing patient wait times by an average of 12.4 minutes in high-density areas.</p>
                           </div>
-                          <p className="text-xs text-slate-500">Logistics AI is reducing patient wait times by an average of 12.4 minutes in high-density areas.</p>
                        </div>
-                     </Section>
-                   )}
+                    </Section>
+                  )}
                   {activeSection === 'drug_interaction' && (
-                    <Section title="Drug Interaction AI" subtitle="Clinical Safety Protocol" icon={ShieldCheck} accent="rose">
-                       <div className="p-8 border border-rose-500/10 rounded-[2.5rem] bg-rose-500/5 space-y-6">
-                          <div className="grid grid-cols-2 gap-4 text-white">
-                             <div className="p-4 bg-slate-950 rounded-2xl border border-white/5">
-                                <p className="text-[10px] text-rose-400 font-bold mb-1">DRUG A</p>
-                                <p className="font-bold">Warfarin</p>
+                    <Section title="Drug Safety AI" subtitle="Clinical Protocol" icon={ShieldCheck} accent="rose">
+                       <div className="space-y-6">
+                          <div className="p-8 border border-rose-500/10 rounded-[2.5rem] bg-rose-500/5 space-y-6">
+                             <div className="grid grid-cols-2 gap-4 text-white">
+                                <div className="p-4 bg-slate-950 rounded-2xl border border-white/5 focus-within:border-rose-500/30 transition-colors">
+                                   <p className="text-[10px] text-rose-400 font-bold mb-1 uppercase">Analyzed Compound A</p>
+                                   <p className="font-bold">Warfarin</p>
+                                </div>
+                                <div className="p-4 bg-slate-950 rounded-2xl border border-white/5 focus-within:border-rose-500/30 transition-colors">
+                                   <p className="text-[10px] text-rose-400 font-bold mb-1 uppercase">Analyzed Compound B</p>
+                                   <p className="font-bold">Aspirin</p>
+                                </div>
                              </div>
-                             <div className="p-4 bg-slate-950 rounded-2xl border border-white/5">
-                                <p className="text-[10px] text-rose-400 font-bold mb-1">DRUG B</p>
-                                <p className="font-bold">Aspirin</p>
+                             
+                             <div className="p-6 bg-rose-500/20 rounded-2xl border border-rose-500/30 flex items-center gap-4 text-rose-100">
+                                <AlertCircle className="w-8 h-8 flex-shrink-0" />
+                                <div className="space-y-1">
+                                   <p className="text-[10px] font-black uppercase tracking-widest text-rose-300">Contraindication Detected</p>
+                                   <p className="text-sm font-medium italic leading-relaxed">"High Risk: Concurrent use may significantly increase bleeding risk via synergistic anti-hemostatic activity. Recommend clinical overrides."</p>
+                                </div>
                              </div>
+
+                             <button className="w-full py-4 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-2xl transition-colors text-sm shadow-xl shadow-rose-600/20">
+                                Request Clinical Override
+                             </button>
                           </div>
-                          <div className="p-6 bg-rose-500/20 rounded-2xl border border-rose-500/30 flex items-center gap-4 text-rose-100">
-                             <AlertCircle className="w-8 h-8 flex-shrink-0" />
-                             <p className="text-xs font-medium italic">"High Risk: Concurrent use may significantly increase bleeding risk via synergistic anti-hemostatic activity."</p>
+                          <div className="flex items-center gap-4 px-6 text-slate-500">
+                             <ShieldCheck className="w-5 h-5 opacity-40" />
+                             <p className="text-[10px] font-medium leading-relaxed italic">This safety audit is cross-referenced with the National Pharmacovigilance database and AI risk modeling.</p>
                           </div>
                        </div>
                     </Section>
